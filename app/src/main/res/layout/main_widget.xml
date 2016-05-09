@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#09C"
+    android:background="#00e676"
     android:orientation="horizontal"
     android:padding="@dimen/widget_margin">
 
@@ -11,29 +11,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <ImageView
-            android:id="@+id/mobiledata_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/mdata1" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:layout_gravity="center"
 
         >
-        <Button
+        <TextView
             android:id="@+id/off_plus"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="+"
+            android:text="OFF"
+            android:textStyle="bold"
             android:layout_weight="1"
+            android:gravity="center"
             />
 
         <TextView
@@ -88,7 +78,8 @@
             android:layout_height="match_parent"
             android:text="-"
             android:layout_weight="1"
-            />    </LinearLayout>
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,26 +88,36 @@
         android:layout_gravity="center"
         android:orientation="vertical"
         >
-        <Button
+
+        <TextView
+            android:id="@+id/on_text_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="ON"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+
+        <ImageButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:visibility="invisible"
+            android:src="@drawable/c_1"
+            android:background="@android:color/transparent"
             />
+
         <Button
-            android:id="@+id/start_stop"
+            android:id="@+id/bosluk"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Start"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:text="-"
             android:layout_weight="1"
             android:visibility="invisible"
             />
     </LinearLayout>
+
+
 
     <!--
     <RelativeLayout
