@@ -3,6 +3,7 @@ package layout;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.widget.ImageView;
 import android.widget.RemoteViews;
 
 import com.mobiledatatimerwidget.R;
@@ -12,6 +13,10 @@ import com.mobiledatatimerwidget.R;
  */
 public class MainWidget extends AppWidgetProvider {
 
+
+
+    //f14d00ff
+
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
@@ -20,8 +25,15 @@ public class MainWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.main_widget);
         //views.setTextViewText(R.id.appwidget_text, widgetText);
 
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+
+    public void scaledImage()
+    {
+
     }
 
     @Override
