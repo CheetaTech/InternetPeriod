@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/button_custom_transparent_selector"
+            android:src="@drawable/button_transparentdown_selector"
             android:background="@android:color/transparent"
             />
 
@@ -82,11 +82,11 @@
 
 
         <ImageButton
-            android:id="@+id/image_button"
+            android:id="@+id/plus_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/button_custom_transparent_selector"
+            android:src="@drawable/button_transparentup_selector"
             android:background="@android:color/transparent"
             />
 
@@ -100,15 +100,27 @@
         android:orientation="vertical"
         >
 
+        <Button
+            android:id="@+id/on_off_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="OFF"
+            android:textColor="@android:color/white"
+            android:background="@android:color/transparent"
+            />
+
+
+        <!--
         <ImageButton
             android:id="@+id/on_off_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/button_custom_transparent_selector"
+            android:src="@drawable/button_transparentup_selector"
             android:background="@android:color/transparent"
             />
-
+            -->
 
 
         <!--
@@ -147,7 +159,7 @@
 
 
         <ImageButton
-            android:id="@+id/start_stop"
+            android:id="@+id/start_stop_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

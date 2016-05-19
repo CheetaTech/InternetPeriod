@@ -19,7 +19,10 @@ import com.mobiledatatimerwidget.R;
 public class MainWidget extends AppWidgetProvider {
 
 
-    private static final String ACTION_UPDATE_CLICK = "com.mobiledatatimerwidget.action.MINUS_CLICK";
+    private static final String ACTION_MINUS_CLICK = "com.mobiledatatimerwidget.action.MINUS_CLICK";
+    private static final String ACTION_PLUS_CLICK = "com.mobiledatatimerwidget.action.PLUS_CLICK";
+    private static final String ACTION_STARTSTOP_CLICK = "com.mobiledatatimerwidget.action.STARTSTOP_CLICK";
+    private static final String ACTION_ONOFF_CLICK = "com.mobiledatatimerwidget.action.ONOFF_CLICK";
 
 
     private static int mCount = 0;
@@ -51,10 +54,12 @@ public class MainWidget extends AppWidgetProvider {
                     R.layout.main_widget);
 
             remoteViews.setTextViewText(R.id.on_text, message);
-            remoteViews.setOnClickPendingIntent(R.id.minus_button,
-                    getPendingSelfIntent(context,
-                            ACTION_UPDATE_CLICK)
-            );
+            remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
+            remoteViews.setOnClickPendingIntent(R.id.plus_button,getPendingSelfIntent(context,ACTION_PLUS_CLICK));
+            remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
+            remoteViews.setOnClickPendingIntent(R.id.start_stop_button,getPendingSelfIntent(context,ACTION_STARTSTOP_CLICK));
+
+
 
             appWidgetManager.updateAppWidget(appWidgetID, remoteViews);
 
@@ -88,9 +93,24 @@ public class MainWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         Log.e("TAG", "Button Clicked");
-        if (ACTION_UPDATE_CLICK.equals(intent.getAction())) {
+        if (ACTION_MINUS_CLICK.equals(intent.getAction())) {
             onUpdate(context);
-            Log.e("TAG","Button Clicked");
+            Log.e("TAG","Button Minus Clicked");
+        }
+
+        if (ACTION_PLUS_CLICK.equals(intent.getAction())) {
+            onUpdate(context);
+            Log.e("TAG","Button Plus Clicked");
+        }
+
+        if (ACTION_ONOFF_CLICK.equals(intent.getAction())) {
+            onUpdate(context);
+            Log.e("TAG","Button OnOff Clicked");
+        }
+
+        if (ACTION_STARTSTOP_CLICK.equals(intent.getAction())) {
+            onUpdate(context);
+            Log.e("TAG","Button StartStop Clicked");
         }
     }
 
