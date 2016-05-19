@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+
+
+
+
+
+    <item android:state_pressed="true"
+        android:drawable="@drawable/ic_stop_button_9696_white"
+        />
+
+
+
+    <item android:state_pressed="false"
+        android:drawable="@drawable/ic_startbutton_96_96_white"
+        />
+
+
+</selector>
