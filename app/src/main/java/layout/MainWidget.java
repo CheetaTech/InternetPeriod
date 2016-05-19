@@ -7,6 +7,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
@@ -38,10 +41,10 @@ public class MainWidget extends AppWidgetProvider {
 
 
     public static final String CheetatechPref = "Chetatech" ;
-    public static final String TimeState = "TimeState";
-    public static final String WorkState = "WorkState";
-    public static final String OnTime = "OnTime";
-    public static final String OffTime = "OffTime";
+    public static final String TimeState = "TimeState1";
+    public static final String WorkState = "WorkState1";
+    public static final String OnTime = "OnTime1";
+    public static final String OffTime = "OffTime1";
 
     SharedPreferences sharedpreferences;
 
@@ -91,15 +94,26 @@ public class MainWidget extends AppWidgetProvider {
 
             Log.e("Deger", "" + onTimeHold + " :: " + offTimeHold);
             remoteViews.setTextViewText(R.id.on_text, String.valueOf(onTimeHold));
-            remoteViews.setTextViewText(R.id.off_text,String.valueOf(offTimeHold));
+            remoteViews.setTextViewText(R.id.off_text, String.valueOf(offTimeHold));
+
+
+
 
 
             remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
-            remoteViews.setOnClickPendingIntent(R.id.plus_button,getPendingSelfIntent(context,ACTION_PLUS_CLICK));
+            remoteViews.setOnClickPendingIntent(R.id.plus_button, getPendingSelfIntent(context, ACTION_PLUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.start_stop_button,getPendingSelfIntent(context,ACTION_STARTSTOP_CLICK));
 
 
+            Drawable startDrawable = context.getResources().getDrawable(R.drawable.ic_startbutton_96_96_white);
+            Drawable stopDrawable = context.getResources().getDrawable(R.drawable.ic_stop_button_9696_white);
+            Bitmap startBitmap = ((BitmapDrawable)startDrawable).getBitmap();
+            Bitmap stopBitmap = ((BitmapDrawable)stopDrawable).getBitmap();
+
+            Bitmap[] bitmaps = new Bitmap[]{startBitmap,stopBitmap};
+            //workState = (workState+1) %2;
+            remoteViews.setImageViewBitmap(R.id.start_stop_button, bitmaps[workState]);
 
             appWidgetManager.updateAppWidget(appWidgetID, remoteViews);
 
@@ -153,16 +167,24 @@ public class MainWidget extends AppWidgetProvider {
         }
 
         if (ACTION_STARTSTOP_CLICK.equals(intent.getAction())) {
-            onUpdate(context);
+
             Log.e("TAG", "Button StartStop Clicked");
             //sharedpreferences = context.getApplicationContext().getSharedPreferences(CheetatechPref,Context.MODE_PRIVATE);
+
             sharedpreferences = context.getSharedPreferences(CheetatechPref, Context.MODE_PRIVATE);
-            Log.e("TAG","1 : "+  sharedpreferences.getInt(OffTime, offTimeHold));
-            Log.e("TAG","2 : " + sharedpreferences.getInt(OnTime, onTimeHold));
-            Log.e("TAG","3 : "+  sharedpreferences.getInt(WorkState, workState));
-            Log.e("TAG","4 : "+  sharedpreferences.getInt(TimeState, timeState));
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            workState = (++workState)%2;
+            Log.e("TAG", "workstateChanged : " + workState);
+            editor.putInt(WorkState, workState); // ya sifir ya bir olacak
+            editor.commit();
 
 
+            Log.e("TAG","x1 : "+  sharedpreferences.getInt(OffTime, offTimeHold));
+            Log.e("TAG","x2 : " + sharedpreferences.getInt(OnTime, onTimeHold));
+            Log.e("TAG","x3 : "+  sharedpreferences.getInt(WorkState, workState));
+            Log.e("TAG","x4 : "+  sharedpreferences.getInt(TimeState, timeState));
+
+            onUpdate(context);
         }
     }
 
@@ -170,12 +192,12 @@ public class MainWidget extends AppWidgetProvider {
 
         if(timeState == 0) // kapali kalma süresi
         {
-            if(offTimeHold++>60)
+            if(++offTimeHold>60)
                 offTimeHold = 60;
         }
         if(timeState == 1) // acik kalma süresi
         {
-            if(onTimeHold++>60)
+            if(++onTimeHold>60)
                 onTimeHold = 60;
         }
     }
