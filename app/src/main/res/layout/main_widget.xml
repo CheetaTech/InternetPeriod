@@ -40,7 +40,25 @@
         android:layout_gravity="center"
 
         >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:background="#FFB300"
+            >
+            <TextView
+                android:gravity="center|bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="off time"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_weight="1"                />
 
+        </LinearLayout>
 
             <TextView
                 android:id="@+id/off_text"
@@ -48,12 +66,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="1"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:layout_weight="1"
+                android:background="#FFB300"
                 />
-
 
 
         <TextView
@@ -64,10 +82,28 @@
             android:text="1"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:layout_weight="1"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:gravity="center|top"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="on time"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_weight="1"                />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -100,6 +136,15 @@
         android:orientation="vertical"
         >
 
+        <ImageButton
+            android:id="@+id/on_off_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_off_clock_new"
+            android:background="@android:color/transparent"
+            />
+        <!--
         <Button
             android:id="@+id/on_off_button"
             android:layout_width="match_parent"
@@ -112,8 +157,12 @@
             android:background="@android:color/transparent"
             />
 
-
+        -->
         <!--
+        -2855,908
+        289,738
+        7,824
+        14,775
         <ImageButton
             android:id="@+id/on_off_button"
             android:layout_width="match_parent"

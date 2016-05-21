@@ -2,5 +2,5 @@
 <rotate xmlns:android="http://schemas.android.com/apk/res/android"
     android:fromDegrees="180"
     android:toDegrees="0"
-    android:drawable="@drawable/ic_arrow_9696_042">
+    android:drawable="@drawable/ic_icon_up_transparent_9696_50_15">
 </rotate>

@@ -204,6 +204,9 @@ public class MainWidget extends AppWidgetProvider {
 
     private void decriment() {
 
+
+        //FFB300
+        // 263238
         if(timeState == 0) // kapali kalma süresi
         {
             if(--offTimeHold<1)
@@ -236,7 +239,7 @@ public class MainWidget extends AppWidgetProvider {
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.main_widget);
             String[] nstr = new String[]{"OFF","ON"};
-            remoteViews.setTextViewText(R.id.on_off_button, nstr[timeState]);
+            //remoteViews.setTextViewText(R.id.on_off_button, nstr[timeState]);
 
             remoteViews.setOnClickPendingIntent(R.id.start_stop_button, getPendingSelfIntent(context, ACTION_STARTSTOP_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
