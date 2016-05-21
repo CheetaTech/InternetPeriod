@@ -57,6 +57,7 @@ public class MainWidget extends AppWidgetProvider {
     private static int onTimeHold =1;
     private static int offTimeHold =1;
 
+    private static int ac = 0;
     int vl = 1;
 
     private PendingIntent getPendingSelfIntent(Context context, String action) {
@@ -98,9 +99,21 @@ public class MainWidget extends AppWidgetProvider {
 
 
 
+            //if(ac = 1)
+            /*
+            {
+                Log.e("TAG","AC = 1");
+                Intent launchActivity = new Intent(context,MainActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context,0, launchActivity, 0);
+                remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, MainActivity.EXTRA_DEFAULT_FRAGMENT));
+                ac = 0;
+            }
+            */
 
-
-            remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
+            Intent intent = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+            remoteViews.setOnClickPendingIntent(R.id.minus_button, pendingIntent);
+            //remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.plus_button, getPendingSelfIntent(context, ACTION_PLUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.start_stop_button,getPendingSelfIntent(context,ACTION_STARTSTOP_CLICK));
@@ -137,6 +150,7 @@ public class MainWidget extends AppWidgetProvider {
         super.onReceive(context, intent);
         Log.e("TAG", "Button Clicked");
         if (ACTION_MINUS_CLICK.equals(intent.getAction())) {
+            openDialog(context);
             decriment();
             onUpdate(context);
             Log.e("TAG", "Button Minus Clicked");
@@ -145,6 +159,9 @@ public class MainWidget extends AppWidgetProvider {
 
         if (ACTION_PLUS_CLICK.equals(intent.getAction())) {
             incremant();
+            SoftwareDialog dialog = new SoftwareDialog();
+            ac = 1;
+            dialog.show(MainActivity.fragmentManager, "SoftwareDialog");
             onUpdate(context);
             Log.e("TAG","Button Plus Clicked");
 
@@ -186,6 +203,22 @@ public class MainWidget extends AppWidgetProvider {
 
             onUpdate(context);
         }
+    }
+
+    private void openDialog(Context context) {
+        //SoftwareDialog dialog = new SoftwareDialog();
+        ac = 1;
+        //dialog.show(getActivity().getSupportFragmentManager(), "SoftwareDialog");
+        /*
+        Intent i = new Intent(context, MainActivity.class);
+        i.putExtra(MainActivity.EXTRA_DEFAULT_FRAGMENT, MainActivity.FRAGMENT_DISCOVER);
+        PendingIntent pi = PendingIntent.getActivity(context, 0, i, 0);
+
+        */
+        /*
+        Intent launchActivity = new Intent(context,AndroidWidgetSample.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0, launchActivity, 0);
+        remoteViews.setOnClickPendingIntent(R.id.widget, pendingIntent2);*/
     }
 
     private void incremant() {

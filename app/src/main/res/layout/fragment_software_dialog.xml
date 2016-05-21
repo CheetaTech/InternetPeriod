@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    android:background="@drawable/backgroundshape"
     >
 
 
@@ -14,7 +13,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
-
+        <ImageView
+            android:id="@+id/labelImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/button_custom_selector_down"
+            android:layout_gravity="left"
+            />
         <TextView
             android:id="@+id/labelName"
             android:layout_width="wrap_content"
