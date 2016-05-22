@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static android.support.v4.app.FragmentManager fragmentManager ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.e("Fragment", "Managet is OK");
