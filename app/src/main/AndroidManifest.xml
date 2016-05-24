@@ -31,6 +31,15 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/main_widget_info" />
         </receiver>
+
+        <activity
+            android:name=".DialogActivity"
+            android:theme="@android:style/Theme.Holo.Light.Dialog"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            >
+        </activity>
+
     </application>
 
 </manifest>

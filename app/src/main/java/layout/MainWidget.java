@@ -1,19 +1,27 @@
 package layout;
 
+import android.app.Dialog;
+import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 
+import com.mobiledatatimerwidget.DialogActivity;
 import com.mobiledatatimerwidget.MainActivity;
 import com.mobiledatatimerwidget.R;
 
@@ -110,10 +118,13 @@ public class MainWidget extends AppWidgetProvider {
             }
             */
 
+            /*
             Intent intent = new Intent(context, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
             remoteViews.setOnClickPendingIntent(R.id.minus_button, pendingIntent);
-            //remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
+            */
+
+            remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.plus_button, getPendingSelfIntent(context, ACTION_PLUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.start_stop_button,getPendingSelfIntent(context,ACTION_STARTSTOP_CLICK));
@@ -204,8 +215,39 @@ public class MainWidget extends AppWidgetProvider {
             onUpdate(context);
         }
     }
-
+    public class FireMissilesDialogFragment extends DialogFragment {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Fire Miss??")
+                    .setPositiveButton("Fire", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // FIRE ZE MISSILES!
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+    }
     private void openDialog(Context context) {
+
+        Intent i = new Intent(context, DialogActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        context.startActivity(i);
+
+
+
+        //SoftwareDialog dialog = new SoftwareDialog();
+
+        //dialog.show(context.getApplicationContext());
+
         //SoftwareDialog dialog = new SoftwareDialog();
         ac = 1;
         //dialog.show(getActivity().getSupportFragmentManager(), "SoftwareDialog");
