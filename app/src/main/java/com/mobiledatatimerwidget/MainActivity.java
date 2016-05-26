@@ -24,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.e("Fragment", "Managet is OK");
         fragmentManager = this.getSupportFragmentManager();
+
+        //android:excludeFromRecents="true"
+        //android:launchMode="singleInstance"
+        //android:theme="@android:style/Theme.Holo.Light.Dialog"
     }
 
 

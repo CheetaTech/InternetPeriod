@@ -124,7 +124,14 @@ public class MainWidget extends AppWidgetProvider {
             remoteViews.setOnClickPendingIntent(R.id.minus_button, pendingIntent);
             */
 
-            remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
+            Intent i = new Intent(context, DialogActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, 0);
+            //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            remoteViews.setOnClickPendingIntent(R.id.minus_button, pendingIntent);
+
+
+
+            //remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.plus_button, getPendingSelfIntent(context, ACTION_PLUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.start_stop_button,getPendingSelfIntent(context,ACTION_STARTSTOP_CLICK));
@@ -238,10 +245,11 @@ public class MainWidget extends AppWidgetProvider {
     }
     private void openDialog(Context context) {
 
+        /*
         Intent i = new Intent(context, DialogActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
         context.startActivity(i);
-
+        */
 
 
         //SoftwareDialog dialog = new SoftwareDialog();
