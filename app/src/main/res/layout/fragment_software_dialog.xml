@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/colorRed"
+                    android:background="@drawable/arrow_r_1"
                     />
 
             </LinearLayout>
@@ -116,10 +116,11 @@
 
                 >
                 <Button
+                    android:id="@+id/button_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/colorRed"
+                    android:background="@drawable/arrow_r_1"
 
                     />
 
@@ -192,7 +193,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@color/colorRed"
+                    android:background="@drawable/arrow_r_1"
 
                     />
 
