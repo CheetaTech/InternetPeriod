@@ -30,22 +30,30 @@
             android:orientation="vertical"
             android:layout_weight="1"
             >
-
-            <Button
+            
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
-                android:layout_weight="1"
-                android:layout_marginBottom="10dp"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorRed"
+                    />
+
+            </LinearLayout>
+
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
-                android:textSize="50sp"
+                android:textSize="70sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:inputType="number"
@@ -53,14 +61,22 @@
                 android:layout_weight="1"
                 />
 
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
-                android:layout_weight="1"
-                android:layout_marginTop="10dp"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorRed"
+                    />
+
+            </LinearLayout>
+ 
         </LinearLayout>
 
 
@@ -92,34 +108,53 @@
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
             >
-
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorRed"
+
+                    />
+
+            </LinearLayout>
+
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
-                android:textSize="50sp"
+                android:textSize="70sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:inputType="number"
                 android:singleLine="true"
                 android:layout_weight="1"
                 />
-            <Button
-                android:background="@color/colorRed"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorRed"
+
+                    />
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -146,33 +181,53 @@
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
             >
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorRed"
+
+                    />
+
+            </LinearLayout>
+
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
-                android:textSize="50sp"
+                android:textSize="70sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:inputType="number"
                 android:singleLine="true"
                 android:layout_weight="1"
                 />
-            <Button
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorRed"
+
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -199,14 +254,20 @@
             android:paddingTop="5dp"
             >
 
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
 
+                >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/colorGreen"
+                />
+                </LinearLayout>
 
             <EditText
                 android:layout_width="wrap_content"
@@ -221,13 +282,22 @@
                 android:layout_weight="1"
                 />
 
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGreen"
+
+                    />
+            </LinearLayout>
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -256,13 +326,21 @@
             android:paddingTop="5dp"
             >
 
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGreen"
+
+                    />
+            </LinearLayout>
              <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -275,13 +353,21 @@
                 android:singleLine="true"
                 android:layout_weight="1"
                 />
-            <Button
-                android:background="@color/colorGreen"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGreen"
+
+                    />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -308,13 +394,21 @@
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
             >
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGreen"
+
+                    />
+            </LinearLayout>
              <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -327,13 +421,21 @@
                 android:singleLine="true"
                 android:layout_weight="1"
                 />
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1.5"
+
+                >
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGreen"
+
+                    />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -344,8 +446,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/space"
-        android:background="@color/colorGray"
+
         android:layout_weight="1"
         >
 
@@ -355,13 +456,13 @@
             android:layout_weight="1"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
+            android:background="@color/colorGray"
             >
             <Button
                 android:id="@+id/cancel_btn_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/ok_btn_id"
-                android:text="Cancel"
+                android:text="CANCEL"
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
