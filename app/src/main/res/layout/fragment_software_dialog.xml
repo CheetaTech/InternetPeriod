@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/arrow_r_1"
+                    android:background="@drawable/mdraw"
                     />
 
             </LinearLayout>
@@ -115,13 +115,13 @@
                 android:layout_weight="1.5"
 
                 >
-                <Button
+                <ImageButton
                     android:id="@+id/button_ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/arrow_r_1"
-
+                    android:background="@drawable/mdraw"
+                    android:scaleType="fitXY"
                     />
 
             </LinearLayout>
@@ -275,7 +275,7 @@
                 android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
-                android:textSize="50sp"
+                android:textSize="70sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:inputType="number"
@@ -347,7 +347,7 @@
                 android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
-                android:textSize="50sp"
+                android:textSize="70sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:inputType="number"
@@ -415,7 +415,7 @@
                 android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
-                android:textSize="50sp"
+                android:textSize="70sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:inputType="number"
