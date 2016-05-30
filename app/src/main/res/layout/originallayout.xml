@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,8 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorBacgroundGray"
-    android:orientation="vertical"
+    android:background="@drawable/backgroundshape"
     tools:context=".MainActivity" >
 
     <LinearLayout
@@ -17,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/colorGray"
-        android:layout_weight="1"
+        android:background="@drawable/drawline"
         >
 
         <LinearLayout
@@ -35,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
+                android:background="#d50000"
 
                 />
             <Space
@@ -56,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
+                android:background="#d50000"
                 />
         </LinearLayout>
         <LinearLayout
@@ -92,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
+                android:background="#d50000"
                 />
             <Space
                 android:layout_width="5sp"
@@ -107,7 +105,7 @@
                 android:textColor="@android:color/white"
                 />
             <Button
-                android:background="@color/colorRed"
+                android:background="#d50000"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -142,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
+                android:background="#d50000"
                 />
             <Space
                 android:layout_width="5sp"
@@ -160,22 +158,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorRed"
+                android:background="#d50000"
                 />
 
         </LinearLayout>
 
     </LinearLayout>
 
+
+    <Space
+        android:id="@+id/space"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:background="@color/colorGray"
-        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/space"
+
+        android:background="@drawable/drawline"
         >
 
         <LinearLayout
@@ -192,7 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
+                android:background="#00C853"
                 />
             <Space
                 android:layout_width="5sp"
@@ -212,7 +218,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
+                android:background="#00C853"
                 />
         </LinearLayout>
         <LinearLayout
@@ -246,7 +252,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
+                android:background="#00C853"
                 />
             <Space
                 android:layout_width="5sp"
@@ -261,7 +267,7 @@
                 android:textColor="@android:color/white"
                 />
             <Button
-                android:background="@color/colorGreen"
+                android:background="#00C853"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -296,7 +302,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
+                android:background="#00C853"
                 />
             <Space
                 android:layout_width="5sp"
@@ -314,77 +320,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/colorGreen"
+                android:background="#00C853"
                 />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/cancel_btn_id"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/space"
-        android:background="@color/colorGray"
-        android:layout_weight="1"
-        >
+        android:layout_alignBaseline="@+id/ok_btn_id"
+        android:layout_alignBottom="@+id/ok_btn_id"
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/ok_btn_id"
+        android:text="Cancel" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            >
-            <Button
-                android:id="@+id/cancel_btn_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/ok_btn_id"
-                android:text="Cancel"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="center"
-                android:background="@drawable/widget_button_cancel_selector"
-                android:textColor="@android:color/white"
-                />
-            <Button
-                android:id="@+id/ok_btn_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerInParent="true"
-                android:text="SAVE"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                android:background="@drawable/widget_button_save_selector"
-                />
-        </LinearLayout>
-        <Button
-            android:id="@+id/cccc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/ok_btn_id"
-            android:layout_alignBottom="@+id/ok_btn_id"
-            android:layout_marginLeft="25dp"
-            android:layout_toRightOf="@+id/ok_btn_id"
-            android:text="Cancel"
-            android:visibility="invisible"
-            />
+    <Button
+        android:id="@+id/ok_btn_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:text="OK" />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-
-    </LinearLayout>
-
-
-
-
-</LinearLayout>
+</RelativeLayout>
