@@ -25,8 +25,8 @@
             android:id="@+id/hourLinear"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
             >
@@ -36,20 +36,21 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorRed"
-
+                android:layout_weight="1"
+                android:layout_marginBottom="10dp"
                 />
-            <Space
-                android:layout_width="5sp"
-                android:layout_height="5sp" />
 
             <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
                 android:textSize="50sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:inputType="number"
+                android:singleLine="true"
+                android:layout_weight="1"
                 />
 
             <Button
@@ -57,8 +58,12 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorRed"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
                 />
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -78,8 +83,8 @@
 
         <LinearLayout
             android:id="@+id/minuteLinear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
             android:divider="?android:dividerHorizontal"
@@ -93,24 +98,27 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorRed"
+                android:layout_weight="1"
                 />
-            <Space
-                android:layout_width="5sp"
-                android:layout_height="5sp" />
+
             <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
                 android:textSize="50sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:inputType="number"
+                android:singleLine="true"
+                android:layout_weight="1"
                 />
             <Button
                 android:background="@color/colorRed"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 />
         </LinearLayout>
 
@@ -131,8 +139,8 @@
 
         <LinearLayout
             android:id="@+id/secondLinear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
             android:paddingBottom="5dp"
@@ -143,24 +151,27 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorRed"
+                android:layout_weight="1"
                 />
-            <Space
-                android:layout_width="5sp"
-                android:layout_height="5sp" />
+
             <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
                 android:textSize="50sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:inputType="number"
+                android:singleLine="true"
+                android:layout_weight="1"
                 />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorRed"
+                android:layout_weight="1"
                 />
 
         </LinearLayout>
@@ -180,8 +191,8 @@
 
         <LinearLayout
             android:id="@+id/hourLinear2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
             android:paddingBottom="5dp"
@@ -193,19 +204,21 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorGreen"
+                android:layout_weight="1"
                 />
-            <Space
-                android:layout_width="5sp"
-                android:layout_height="5sp" />
+
 
             <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
                 android:textSize="50sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:inputType="number"
+                android:singleLine="true"
+                android:layout_weight="1"
                 />
 
             <Button
@@ -213,6 +226,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorGreen"
+                android:layout_weight="1"
                 />
         </LinearLayout>
         <LinearLayout
@@ -234,8 +248,8 @@
 
         <LinearLayout
             android:id="@+id/minuteLinear2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
             android:paddingBottom="5dp"
@@ -247,24 +261,26 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorGreen"
+                android:layout_weight="1"
                 />
-            <Space
-                android:layout_width="5sp"
-                android:layout_height="5sp" />
-            <EditText
+             <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
                 android:textSize="50sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:inputType="number"
+                android:singleLine="true"
+                android:layout_weight="1"
                 />
             <Button
                 android:background="@color/colorGreen"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 />
         </LinearLayout>
 
@@ -285,8 +301,8 @@
 
         <LinearLayout
             android:id="@+id/secondLinear2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
             android:paddingBottom="5dp"
@@ -297,24 +313,26 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorGreen"
+                android:layout_weight="1"
                 />
-            <Space
-                android:layout_width="5sp"
-                android:layout_height="5sp" />
-            <EditText
+             <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="07"
                 android:layout_gravity="center"
                 android:textSize="50sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:inputType="number"
+                android:singleLine="true"
+                android:layout_weight="1"
                 />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@color/colorGreen"
+                android:layout_weight="1"
                 />
 
         </LinearLayout>
