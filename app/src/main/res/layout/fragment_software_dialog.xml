@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             >
             
             <LinearLayout
@@ -40,18 +40,6 @@
                 android:orientation="vertical"
                 >
 
-
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/mdraw"
-                    android:background="@drawable/button_normal_selector"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    android:visibility="invisible"
-                    />
                 <ImageButton
                     android:id="@+id/button_oks"
                     android:layout_width="match_parent"
@@ -96,23 +84,12 @@
                     android:layout_gravity="center"
                     android:scaleType="centerInside"
                     android:src="@drawable/arrow_red_inv"
-                    android:background="@drawable/buton_basili"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-
-                    />
-                <ImageButton
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/mdraw"
                     android:background="@drawable/button_normal_selector"
                     android:adjustViewBounds="true"
                     android:layout_weight="1"
-                    android:visibility="invisible"
+
                     />
+
 
             </LinearLayout>
  
@@ -154,26 +131,13 @@
                 android:layout_weight="1.5"
                 android:orientation="vertical"
                 >
-
-
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/mdraw"
-                    android:background="@drawable/button_normal_selector"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    android:visibility="invisible"
-                    />
                 <ImageButton
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:scaleType="centerInside"
                     android:src="@drawable/arrow_red"
-                    android:background="@drawable/buton_basili"
+                    android:background="@drawable/button_normal_selector"
                     android:adjustViewBounds="true"
                     android:layout_weight="1"
                     />
@@ -214,17 +178,7 @@
                     android:layout_weight="1"
 
                     />
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/mdraw"
-                    android:background="@drawable/button_normal_selector"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    android:visibility="invisible"
-                    />
+
 
             </LinearLayout>
         </LinearLayout>
@@ -252,6 +206,7 @@
             android:layout_weight="1"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
+            android:layout_marginRight="5dp"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -261,18 +216,6 @@
                 android:orientation="vertical"
                 >
 
-
-                <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/mdraw"
-                    android:background="@drawable/button_normal_selector"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    android:visibility="invisible"
-                    />
                 <ImageButton
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -319,18 +262,6 @@
                     android:layout_weight="1"
 
                     />
-                <ImageButton
-                    android:id="@+id/button_oksdd"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/mdraw"
-                    android:background="@drawable/button_normal_selector"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    android:visibility="invisible"
-                    />
 
             </LinearLayout>
 
@@ -357,6 +288,7 @@
             android:layout_weight="1"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
+            android:layout_marginLeft="5dp"
             >
 
             <LinearLayout
@@ -439,6 +371,7 @@
             android:orientation="vertical"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
+
             >
 
             <LinearLayout
@@ -454,7 +387,7 @@
                     android:layout_gravity="center"
                     android:scaleType="centerInside"
                     android:src="@drawable/arrow_green"
-                    android:background="@drawable/buton_basili"
+                    android:background="@drawable/button_normal_selector"
                     android:adjustViewBounds="true"
                     android:layout_weight="1"
 
@@ -515,6 +448,7 @@
             android:layout_weight="1"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
+            android:layout_marginRight="5dp"
             >
             <LinearLayout
                 android:layout_width="match_parent"
