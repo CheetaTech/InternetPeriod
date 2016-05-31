@@ -15,7 +15,7 @@
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:background="@color/colorGray"
         android:layout_weight="1"
@@ -32,17 +32,35 @@
             >
             
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
-
+                android:orientation="vertical"
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/mdraw"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/mdraw"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+                <ImageButton
+                    android:id="@+id/button_oks"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_red"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
                     />
 
             </LinearLayout>
@@ -62,17 +80,36 @@
                 />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
-
+                android:orientation="vertical"
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@color/colorRed"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_red_inv"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+
+                    />
+                <ImageButton
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/mdraw"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
                     />
 
             </LinearLayout>
@@ -109,19 +146,34 @@
             android:paddingTop="5dp"
             >
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
-
+                android:orientation="vertical"
                 >
+
+
                 <ImageButton
-                    android:id="@+id/button_ok"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/mdraw"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/mdraw"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    />
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_red"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
                     />
 
             </LinearLayout>
@@ -141,18 +193,35 @@
                 />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
                 android:layout_weight="1.5"
-
+                android:orientation="vertical"
+                android:layout_gravity="center"
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/colorRed"
 
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_red_inv"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+
+                    />
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/mdraw"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
                     />
 
             </LinearLayout>
@@ -183,20 +252,35 @@
             android:paddingTop="5dp"
             >
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
-
+                android:orientation="vertical"
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@drawable/arrow_r_1"
-
+                    android:scaleType="centerInside"
+                    android:src="@drawable/mdraw"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
                     />
-
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/mdraw"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    />
             </LinearLayout>
 
 
@@ -214,18 +298,36 @@
                 />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
-
+                android:orientation="vertical"
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@color/colorRed"
 
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_red_inv"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+
+                    />
+                <ImageButton
+                    android:id="@+id/button_oksdd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/mdraw"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
                     />
 
             </LinearLayout>
@@ -237,7 +339,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
@@ -256,18 +358,24 @@
             >
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
 
                 >
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/colorGreen"
-                />
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_green"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+
+                    />
+
                 </LinearLayout>
 
             <EditText
@@ -284,17 +392,21 @@
                 />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
 
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@color/colorGreen"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_green_inv"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
 
                     />
             </LinearLayout>
@@ -328,17 +440,21 @@
             >
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
 
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@color/colorGreen"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_green"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
 
                     />
             </LinearLayout>
@@ -355,18 +471,21 @@
                 android:layout_weight="1"
                 />
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
 
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@color/colorGreen"
-
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_green_inv"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -396,17 +515,21 @@
             android:paddingTop="5dp"
             >
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
 
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@color/colorGreen"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_green"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
 
                     />
             </LinearLayout>
@@ -423,17 +546,21 @@
                 android:layout_weight="1"
                 />
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
 
                 >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@color/colorGreen"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_green_inv"
+                    android:background="@drawable/button_normal_selector"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
 
                     />
             </LinearLayout>
@@ -445,15 +572,13 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-
         android:layout_weight="1"
         >
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
@@ -488,6 +613,14 @@
                 android:background="@drawable/widget_button_save_selector"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:background="@android:color/transparent"
+            >
         <Button
             android:id="@+id/cccc"
             android:layout_width="wrap_content"
@@ -500,7 +633,7 @@
             android:visibility="invisible"
             />
 
-
+            </LinearLayout>
 
     </LinearLayout>
 

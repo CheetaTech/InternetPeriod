@@ -10,6 +10,6 @@
         >
         <bitmap
             android:gravity="center|bottom|clip_vertical|end"
-            android:src="@drawable/arrow_r_1" />
+            android:src="@drawable/arrow_g_1" />
     </item>
 </layer-list>
