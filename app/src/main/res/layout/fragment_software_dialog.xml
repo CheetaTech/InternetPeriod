@@ -29,6 +29,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
             >
             
             <LinearLayout
@@ -85,6 +86,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1.5"
                 android:orientation="vertical"
+
                 >
 
 
@@ -94,7 +96,7 @@
                     android:layout_gravity="center"
                     android:scaleType="centerInside"
                     android:src="@drawable/arrow_red_inv"
-                    android:background="@drawable/button_normal_selector"
+                    android:background="@drawable/buton_basili"
                     android:adjustViewBounds="true"
                     android:layout_weight="1"
 
@@ -171,7 +173,7 @@
                     android:layout_gravity="center"
                     android:scaleType="centerInside"
                     android:src="@drawable/arrow_red"
-                    android:background="@drawable/button_normal_selector"
+                    android:background="@drawable/buton_basili"
                     android:adjustViewBounds="true"
                     android:layout_weight="1"
                     />
@@ -452,7 +454,7 @@
                     android:layout_gravity="center"
                     android:scaleType="centerInside"
                     android:src="@drawable/arrow_green"
-                    android:background="@drawable/button_normal_selector"
+                    android:background="@drawable/buton_basili"
                     android:adjustViewBounds="true"
                     android:layout_weight="1"
 
