@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="widgetValue"
+            type="com.mobiledatatimerwidget.echo.WidgetValues"/>
+    </data>
+
+
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -15,7 +25,6 @@
     android:focusableInTouchMode="true"
     android:id="@+id/rlRoot"
     >
-
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -67,7 +76,7 @@
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="01"
-                android:text="08"
+                android:text="@{widgetValue.offHour}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
                 android:inputType="number"
@@ -76,6 +85,7 @@
                 android:textColorHint="@android:color/white"
                 android:textSize="70sp"
                 android:layout_weight="1"
+                android:addTextChangedListener="@{widgetValue.watcherOffHour}"
                 />
             <!--
             <com.mobiledatatimerwidget.AutoResizeEditText
@@ -195,7 +205,7 @@
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="01"
-                android:text="08"
+                android:text="@{widgetValue.offMin}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
                 android:inputType="number"
@@ -204,6 +214,7 @@
                 android:textColorHint="@android:color/white"
                 android:textSize="70sp"
                 android:layout_weight="1"
+                android:addTextChangedListener="@{widgetValue.watcherOffMin}"
                 />
 
             <!--
@@ -305,7 +316,7 @@
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="01"
-                android:text="08"
+                android:text="@{widgetValue.offSec}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
                 android:inputType="number"
@@ -314,6 +325,7 @@
                 android:textColorHint="@android:color/white"
                 android:textSize="70sp"
                 android:layout_weight="1"
+                android:addTextChangedListener="@{widgetValue.watcherOffSec}"
                 />
             <!--
             <EditText
@@ -410,7 +422,7 @@
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="01"
-                android:text="08"
+                android:text="@{widgetValue.onHour}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
                 android:inputType="number"
@@ -419,6 +431,7 @@
                 android:textColorHint="@android:color/white"
                 android:textSize="70sp"
                 android:layout_weight="1"
+                android:addTextChangedListener="@{widgetValue.watcherOnHour}"
                 />
             <!--
             <EditText
@@ -515,7 +528,7 @@
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="01"
-                android:text="08"
+                android:text="@{widgetValue.onMin}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
                 android:inputType="number"
@@ -524,6 +537,7 @@
                 android:textColorHint="@android:color/white"
                 android:textSize="70sp"
                 android:layout_weight="1"
+                android:addTextChangedListener="@{widgetValue.watcherOnMin}"
                 />
             <!--
             <EditText
@@ -616,7 +630,7 @@
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="01"
-                android:text="08"
+                android:text="@{widgetValue.onSec}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
                 android:inputType="number"
@@ -625,6 +639,7 @@
                 android:textColorHint="@android:color/white"
                 android:textSize="70sp"
                 android:layout_weight="1"
+                android:addTextChangedListener="@{widgetValue.watcherOnSec}"
                 />
             <!--
              <EditText
@@ -735,4 +750,6 @@
 
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>
