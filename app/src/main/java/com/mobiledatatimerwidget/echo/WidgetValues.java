@@ -8,7 +8,7 @@ import com.mobiledatatimerwidget.bindablevalues.BindableString;
 
 import it.cosenonjaviste.databinding.util.TextWatcherAdapter;
 
-
+//android:background="#FFB300" Sarı renk
 public class WidgetValues {
     public BindableString offHour = new BindableString();
     public BindableString offMin = new BindableString();

@@ -102,8 +102,8 @@ public class MainWidget extends AppWidgetProvider {
 
 
             Log.e("Deger", "" + onTimeHold + " :: " + offTimeHold);
-            remoteViews.setTextViewText(R.id.on_text, String.valueOf(onTimeHold));
-            remoteViews.setTextViewText(R.id.off_text, String.valueOf(offTimeHold));
+            //remoteViews.setTextViewText(R.id.on_text, String.valueOf(onTimeHold));
+            //remoteViews.setTextViewText(R.id.off_text, String.valueOf(offTimeHold));
 
 
 
