@@ -1,6 +1,7 @@
 package com.mobiledatatimerwidget;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +16,9 @@ import com.mobiledatatimerwidget.AutoSize.AutoFitEditText;
 import com.mobiledatatimerwidget.AutoSize.AutoFitEditTextUtil;
 import com.mobiledatatimerwidget.databinding.FragmentSoftwareDialogBinding;
 import com.mobiledatatimerwidget.echo.WidgetValues;
+import com.mobiledatatimerwidget.echo.onBinding;
 
-public class DialogActivity extends Activity implements OnClickListener {
+public class DialogActivity extends Activity implements OnClickListener ,onBinding{
 
     Button ok_btn , cancel_btn;
     AutoResizeEditText mAutoResizeEditText = null;
@@ -26,15 +28,20 @@ public class DialogActivity extends Activity implements OnClickListener {
     AutoFitEditText etxtOnMin = null;
     LinearLayout mRootView;
     WidgetValues widgetValues = null;
+    private SharedPreferences sharedpreferences;
     public int val = 5;
+
+
     FragmentSoftwareDialogBinding binding = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         //setContentView(R.fragment_software_dialog);
+
         binding = DataBindingUtil.setContentView(this,R.layout.fragment_software_dialog);
         widgetValues  = new WidgetValues("1","2","3","4","5","6");
+        //widgetValues.setListener(this);
         binding.setWidgetValue(widgetValues);
         mRootView = (LinearLayout)findViewById(R.id.rlRoot);
         loadButton();
@@ -275,6 +282,12 @@ public class DialogActivity extends Activity implements OnClickListener {
     }
 
 
-
-
+    @Override
+    public void onBindingAccept() {
+        if(binding==null)
+            return;
+        if(widgetValues==null)
+            return;
+        binding.setWidgetValue(widgetValues);
+    }
 }

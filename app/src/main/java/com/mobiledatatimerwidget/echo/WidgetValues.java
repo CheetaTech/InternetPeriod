@@ -9,13 +9,14 @@ import com.mobiledatatimerwidget.bindablevalues.BindableString;
 import it.cosenonjaviste.databinding.util.TextWatcherAdapter;
 
 //android:background="#FFB300" Sarı renk
-public class WidgetValues {
+public class WidgetValues{
     public BindableString offHour = new BindableString();
     public BindableString offMin = new BindableString();
     public BindableString offSec = new BindableString();
     public BindableString onHour = new BindableString();
     public BindableString onMin = new BindableString();
     public BindableString onSec = new BindableString();
+    private onBinding onBinding = null;
 
     public WidgetValues()
     {
@@ -29,6 +30,10 @@ public class WidgetValues {
         this.onHour.set(onHour);
         this.onMin.set(onMin);
         this.onSec.set(onSec);
+    }
+    public void setListener(onBinding binding)
+    {
+        this.onBinding = binding;
     }
 
     public void setOffHour(String offHour)
@@ -104,6 +109,8 @@ public class WidgetValues {
     {
         return this.onMin.get();
     }
+
+
     public String getOnSec()
     {
         return this.onSec.get();
@@ -131,12 +138,25 @@ public class WidgetValues {
             }
             */
         }
+
+
     };
     public TextWatcher watcherOffHour = new TextWatcherAdapter() {
+
         @Override public void afterTextChanged(Editable s) {
+            Log.e("TAG", "In Watcher...." + s.toString());
             offHour.set(controlEditValue(s.toString(),23));
             //offHour.set(s.toString());
+            //onBinding.onBindingAccept();
         }
+
+        /*
+        @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
+            Log.e("TAG", "In Watcher...." + s.toString());
+            offHour.set(controlEditValue(s.toString(), 23));
+            onBinding.onBindingAccept();
+        }*/
+
     };
     public TextWatcher watcherOffMin = new TextWatcherAdapter() {
         @Override public void afterTextChanged(Editable s) {
@@ -165,7 +185,9 @@ public class WidgetValues {
     public TextWatcher watcherOnSec = new TextWatcherAdapter() {
         @Override public void afterTextChanged(Editable s) {
             //onSec.set(s.toString());
-            onSec.set(controlEditValue(s.toString(),59));
+            onSec.set(controlEditValue(s.toString(), 59));
         }
     };
+
+
 }
