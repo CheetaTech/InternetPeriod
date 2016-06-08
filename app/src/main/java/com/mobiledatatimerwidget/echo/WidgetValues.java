@@ -109,6 +109,17 @@ public class WidgetValues {
         return this.onSec.get();
     }
 
+    private String controlEditValue(String val,int border)
+    {
+        int number ;
+        try {
+            number = Integer.parseInt(val);
+        }catch (NumberFormatException e)
+        {
+            number = 1;
+        }
+        return (number>border) ? String.valueOf(border) : String.valueOf(number);
+    }
 
 
     public TextWatcher watcher = new TextWatcherAdapter() {
@@ -123,32 +134,38 @@ public class WidgetValues {
     };
     public TextWatcher watcherOffHour = new TextWatcherAdapter() {
         @Override public void afterTextChanged(Editable s) {
-            offHour.set(s.toString());
+            offHour.set(controlEditValue(s.toString(),23));
+            //offHour.set(s.toString());
         }
     };
     public TextWatcher watcherOffMin = new TextWatcherAdapter() {
         @Override public void afterTextChanged(Editable s) {
-            offMin.set(s.toString());
+            //offMin.set(s.toString());
+            offMin.set(controlEditValue(s.toString(), 59));
         }
     };
     public TextWatcher watcherOffSec = new TextWatcherAdapter() {
         @Override public void afterTextChanged(Editable s) {
-            offSec.set(s.toString());
+            offSec.set(controlEditValue(s.toString(), 59));
+            //offSec.set(s.toString());
         }
     };
     public TextWatcher watcherOnHour = new TextWatcherAdapter() {
         @Override public void afterTextChanged(Editable s) {
-            onHour.set(s.toString());
+            onHour.set(controlEditValue(s.toString(), 23));
+            //onHour.set(s.toString());
         }
     };
     public TextWatcher watcherOnMin = new TextWatcherAdapter() {
         @Override public void afterTextChanged(Editable s) {
-            onMin.set(s.toString());
+            //onMin.set(s.toString());
+            onMin.set(controlEditValue(s.toString(), 59));
         }
     };
     public TextWatcher watcherOnSec = new TextWatcherAdapter() {
         @Override public void afterTextChanged(Editable s) {
-            onSec.set(s.toString());
+            //onSec.set(s.toString());
+            onSec.set(controlEditValue(s.toString(),59));
         }
     };
 }

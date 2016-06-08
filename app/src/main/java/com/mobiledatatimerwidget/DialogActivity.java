@@ -22,10 +22,8 @@ public class DialogActivity extends Activity implements OnClickListener {
     AutoResizeEditText mAutoResizeEditText = null;
     AutoFitEditText etxtOffHour = null;
     AutoFitEditText etxtOffMin = null;
-    AutoFitEditText etxtOffSec = null;
     AutoFitEditText etxtOnHour= null;
     AutoFitEditText etxtOnMin = null;
-    AutoFitEditText etxtOnSec = null;
     LinearLayout mRootView;
     WidgetValues widgetValues = null;
     public int val = 5;
@@ -36,7 +34,7 @@ public class DialogActivity extends Activity implements OnClickListener {
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         //setContentView(R.fragment_software_dialog);
         binding = DataBindingUtil.setContentView(this,R.layout.fragment_software_dialog);
-        widgetValues  = new WidgetValues("01","02","03","04","05","06");
+        widgetValues  = new WidgetValues("1","2","3","4","5","6");
         binding.setWidgetValue(widgetValues);
         mRootView = (LinearLayout)findViewById(R.id.rlRoot);
         loadButton();
@@ -59,12 +57,6 @@ public class DialogActivity extends Activity implements OnClickListener {
             case R.id.btnOffMinMinus:
                 value--;
                 return (value<0)?0:value;
-            case R.id.btnOffSecPlus:
-                value++;
-                return (value>59)?59:value;
-            case R.id.btnOffSecMinus:
-                value--;
-                return (value<0)?0:value;
             case R.id.btnOnHourPlus:
                 value++;
                 return (value>23)?23:value;
@@ -75,12 +67,6 @@ public class DialogActivity extends Activity implements OnClickListener {
                 value++;
                 return (value>59)?59:value;
             case R.id.btnOnMinMinus:
-                value--;
-                return (value<0)?0:value;
-            case R.id.btnOnSecPlus:
-                value++;
-                return (value>59)?59:value;
-            case R.id.btnOnSecMinus:
                 value--;
                 return (value<0)?0:value;
         }
@@ -116,14 +102,6 @@ public class DialogActivity extends Activity implements OnClickListener {
                 widgetValues.setOffMin(checkValue(R.id.btnOffMinMinus, value));
                 binding.setWidgetValue(widgetValues);
                 break;
-            case R.id.btnOffSecPlus:
-                widgetValues.setOffSec(checkValue(R.id.btnOffSecPlus, value));
-                binding.setWidgetValue(widgetValues);
-                break;
-            case R.id.btnOffSecMinus:
-                widgetValues.setOffSec(checkValue(R.id.btnOffSecMinus, value));
-                binding.setWidgetValue(widgetValues);
-                break;
             case R.id.btnOnHourPlus:
                 widgetValues.setOnHour(checkValue(R.id.btnOnHourPlus, value));
                 binding.setWidgetValue(widgetValues);
@@ -140,14 +118,6 @@ public class DialogActivity extends Activity implements OnClickListener {
                 widgetValues.setOnMin(checkValue(R.id.btnOnMinMinus, value));
                 binding.setWidgetValue(widgetValues);
                 break;
-            case R.id.btnOnSecPlus:
-                widgetValues.setOnSec(checkValue(R.id.btnOnSecPlus, value));
-                binding.setWidgetValue(widgetValues);
-                break;
-            case R.id.btnOnSecMinus:
-                widgetValues.setOnSec(checkValue(R.id.btnOnSecMinus, value));
-                binding.setWidgetValue(widgetValues);
-                break;
         }
 
 
@@ -160,17 +130,13 @@ public class DialogActivity extends Activity implements OnClickListener {
 
         etxtOffHour = (AutoFitEditText)findViewById(R.id.etxtOffHour);
         etxtOffMin =(AutoFitEditText)findViewById(R.id.etxtOffMin);
-        etxtOffSec =(AutoFitEditText)findViewById(R.id.etxtOffSec);
         etxtOnHour=(AutoFitEditText)findViewById(R.id.etxtOnHour);
         etxtOnMin =(AutoFitEditText)findViewById(R.id.etxtOnMin);
-        etxtOnSec =(AutoFitEditText)findViewById(R.id.etxtOnSec);
 
         initAutoFitEditText(etxtOffHour);
         initAutoFitEditText(etxtOffMin);
-        initAutoFitEditText(etxtOffSec);
         initAutoFitEditText(etxtOnHour);
         initAutoFitEditText(etxtOnMin);
-        initAutoFitEditText(etxtOnSec);
     }
     private void loadButton()
     {
@@ -182,14 +148,10 @@ public class DialogActivity extends Activity implements OnClickListener {
         ((ImageButton)findViewById(R.id.btnOffHourMinus)).setOnClickListener(this);
         ((ImageButton)findViewById(R.id.btnOffMinPlus)).setOnClickListener(this);
         ((ImageButton)findViewById(R.id.btnOffMinMinus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOffSecPlus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOffSecMinus)).setOnClickListener(this);
         ((ImageButton)findViewById(R.id.btnOnHourPlus)).setOnClickListener(this);
         ((ImageButton)findViewById(R.id.btnOnHourMinus)).setOnClickListener(this);
         ((ImageButton)findViewById(R.id.btnOnMinPlus)).setOnClickListener(this);
         ((ImageButton)findViewById(R.id.btnOnMinMinus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOnSecPlus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOnSecMinus)).setOnClickListener(this);
     }
 
     private void initAutoFitEditText(AutoFitEditText autoFitEditText)
@@ -272,12 +234,6 @@ public class DialogActivity extends Activity implements OnClickListener {
         case R.id.btnOffMinMinus:
             controlEditText(R.id.btnOffMinMinus,widgetValues.getOffMin().toString());
             break;
-        case R.id.btnOffSecPlus:
-            controlEditText(R.id.btnOffSecPlus,widgetValues.getOffSec().toString());
-            break;
-        case R.id.btnOffSecMinus:
-            controlEditText(R.id.btnOffSecMinus, widgetValues.getOffSec().toString());
-            break;
         case R.id.btnOnHourPlus:
             controlEditText(R.id.btnOnHourPlus,widgetValues.getOnHour().toString());
             break;
@@ -289,12 +245,6 @@ public class DialogActivity extends Activity implements OnClickListener {
             break;
         case R.id.btnOnMinMinus:
             controlEditText(R.id.btnOnMinMinus,widgetValues.getOnMin().toString());
-            break;
-        case R.id.btnOnSecPlus:
-            controlEditText(R.id.btnOnSecPlus,widgetValues.getOnSec().toString());
-            break;
-        case R.id.btnOnSecMinus:
-            controlEditText(R.id.btnOnSecMinus,widgetValues.getOnSec().toString());
             break;
         }
 

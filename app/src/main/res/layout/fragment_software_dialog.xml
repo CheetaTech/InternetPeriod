@@ -75,7 +75,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:hint="01"
+                android:hint="1"
                 android:text="@{widgetValue.offHour}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
@@ -87,38 +87,7 @@
                 android:layout_weight="1"
                 android:addTextChangedListener="@{widgetValue.watcherOffHour}"
                 />
-            <!--
-            <com.mobiledatatimerwidget.AutoResizeEditText
-                android:id="@+id/rET"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text="07"
-                android:textStyle="bold"
-                android:isScrollContainer="false"
-                android:inputType="textMultiLine|textNoSuggestions"
-                android:maxLength="200"
-                android:textColor="@android:color/white"
-                android:textSize="40sp"
-                android:layout_weight="1"
-                />
-            -->
-            <!--
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="07"
-                android:layout_gravity="center"
-                android:textSize="70dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:inputType="number"
-                android:singleLine="true"
-                android:layout_weight="1"
-                />
-                -->
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -204,7 +173,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:hint="01"
+                android:hint="1"
                 android:text="@{widgetValue.offMin}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
@@ -260,112 +229,12 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=":"
-                android:textSize="50sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/secondLinear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:layout_marginRight="5dp"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
-                android:orientation="vertical"
-                >
-
-                <ImageButton
-                    android:id="@+id/btnOffSecPlus"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/mdraw"
-                    android:background="@drawable/button_normal_selector"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    />
-            </LinearLayout>
 
 
 
-            <com.mobiledatatimerwidget.AutoSize.AutoFitEditText
-                android:id="@+id/etxtOffSec"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center_vertical|center_horizontal"
-                android:hint="01"
-                android:text="@{widgetValue.offSec}"
-                android:textStyle="bold"
-                android:isScrollContainer="false"
-                android:inputType="number"
-                android:maxLength="2"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:textSize="70sp"
-                android:layout_weight="1"
-                android:addTextChangedListener="@{widgetValue.watcherOffSec}"
-                />
-            <!--
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="07"
-                android:layout_gravity="center"
-                android:textSize="70sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:inputType="number"
-                android:singleLine="true"
-                android:layout_weight="1"
-                />
-                -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
-                android:orientation="vertical"
-                >
 
 
-                <ImageButton
-                    android:id="@+id/btnOffSecMinus"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/arrow_red_inv"
-                    android:background="@drawable/button_normal_selector"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
 
-                    />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -421,7 +290,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:hint="01"
+                android:hint="1"
                 android:text="@{widgetValue.onHour}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
@@ -527,7 +396,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:hint="01"
+                android:hint="1"
                 android:text="@{widgetValue.onMin}"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
@@ -574,108 +443,8 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text=":"
-                android:textSize="50sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/secondLinear2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:layout_marginRight="5dp"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
-
-                >
-                <ImageButton
-                    android:id="@+id/btnOnSecPlus"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/arrow_green"
-                    android:background="@drawable/button_normal_selector"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-
-                    />
-            </LinearLayout>
 
 
-
-            <com.mobiledatatimerwidget.AutoSize.AutoFitEditText
-                android:id="@+id/etxtOnSec"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center_vertical|center_horizontal"
-                android:hint="01"
-                android:text="@{widgetValue.onSec}"
-                android:textStyle="bold"
-                android:isScrollContainer="false"
-                android:inputType="number"
-                android:maxLength="2"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:textSize="70sp"
-                android:layout_weight="1"
-                android:addTextChangedListener="@{widgetValue.watcherOnSec}"
-                />
-            <!--
-             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="07"
-                android:layout_gravity="center"
-                android:textSize="70sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:inputType="number"
-                android:singleLine="true"
-                android:layout_weight="1"
-                />
-                -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
-
-                >
-                <ImageButton
-                    android:id="@+id/btnOnSecMinus"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/arrow_green_inv"
-                    android:background="@drawable/button_normal_selector"
-                    android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    />
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 
