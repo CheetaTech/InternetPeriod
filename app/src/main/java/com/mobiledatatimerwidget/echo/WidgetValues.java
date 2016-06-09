@@ -31,6 +31,21 @@ public class WidgetValues{
         this.onMin.set(onMin);
         this.onSec.set(onSec);
     }
+    public WidgetValues(String offHour,String offMin,String onHour,String onMin)
+    {
+        this.offHour.set(offHour);
+        this.offMin.set(offMin);
+        this.onHour.set(onHour);
+        this.onMin.set(onMin);
+    }
+    public WidgetValues(int offHour,int offMin,int onHour,int onMin)
+    {
+        this.offHour.set(String.valueOf(offHour));
+        this.offMin.set(String.valueOf(offMin));
+        this.onHour.set(String.valueOf(onHour));
+        this.onMin.set(String.valueOf(onMin));
+    }
+
     public void setListener(onBinding binding)
     {
         this.onBinding = binding;
@@ -115,6 +130,25 @@ public class WidgetValues{
     {
         return this.onSec.get();
     }
+
+
+    public int getIntOffHour()
+    {
+        return Integer.parseInt(this.offHour.get());
+    }
+    public int getIntOffMin()
+    {
+        return Integer.parseInt(this.offMin.get());
+    }
+    public int getIntOnHour()
+    {
+        return Integer.parseInt(this.onHour.get());
+    }
+    public int getIntOnMin()
+    {
+        return Integer.parseInt(this.onMin.get());
+    }
+
 
     private String controlEditValue(String val,int border)
     {

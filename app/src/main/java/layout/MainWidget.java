@@ -1,7 +1,6 @@
 package layout;
 
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -18,7 +17,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.RemoteViews;
 
 import com.mobiledatatimerwidget.DialogActivity;
@@ -53,6 +51,11 @@ public class MainWidget extends AppWidgetProvider {
     public static final String WorkState = "WorkState1";
     public static final String OnTime = "OnTime1";
     public static final String OffTime = "OffTime1";
+    public static final String OffHour = "OffHour";
+    public static final String OffMin = "OffMin";
+
+    public static final String OnHour = "OnHour";
+    public static final String OnMin = "OnMin";
 
     SharedPreferences sharedpreferences;
 

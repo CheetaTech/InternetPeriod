@@ -464,7 +464,7 @@
             android:background="@color/colorGray"
             >
             <Button
-                android:id="@+id/cancel_btn_id"
+                android:id="@+id/btn_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="CANCEL"
@@ -477,7 +477,7 @@
                 android:textColor="@android:color/white"
                 />
             <Button
-                android:id="@+id/ok_btn_id"
+                android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

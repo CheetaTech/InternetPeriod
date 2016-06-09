@@ -1,9 +1,11 @@
 package com.mobiledatatimerwidget;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -17,6 +19,8 @@ import com.mobiledatatimerwidget.AutoSize.AutoFitEditTextUtil;
 import com.mobiledatatimerwidget.databinding.FragmentSoftwareDialogBinding;
 import com.mobiledatatimerwidget.echo.WidgetValues;
 import com.mobiledatatimerwidget.echo.onBinding;
+
+import layout.MainWidget;
 
 public class DialogActivity extends Activity implements OnClickListener ,onBinding{
 
@@ -39,8 +43,12 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         //setContentView(R.fragment_software_dialog);
 
+
+
+        reaadingSharedValues();
+
         binding = DataBindingUtil.setContentView(this,R.layout.fragment_software_dialog);
-        widgetValues  = new WidgetValues("1","2","3","4","5","6");
+        //widgetValues  = new WidgetValues("1","2","3","4","5","6");
         //widgetValues.setListener(this);
         binding.setWidgetValue(widgetValues);
         mRootView = (LinearLayout)findViewById(R.id.rlRoot);
@@ -147,8 +155,8 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
     }
     private void loadButton()
     {
-        ok_btn = (Button) findViewById(R.id.ok_btn_id);
-        cancel_btn = (Button) findViewById(R.id.cancel_btn_id);
+        ok_btn = (Button) findViewById(R.id.btn_save);
+        cancel_btn = (Button) findViewById(R.id.btn_cancel);
         ok_btn.setOnClickListener(this);
         cancel_btn.setOnClickListener(this);
         ((ImageButton)findViewById(R.id.btnOffHourPlus)).setOnClickListener(this);
@@ -211,18 +219,17 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
     public void onClick(View v) {
 
         switch (v.getId()) {
-        case R.id.ok_btn_id:
+        case R.id.btn_save:
 
             showToastMessage("Ok Button Clicked");
+            saveFileFunction();
             this.finish();
-
             break;
 
-        case R.id.cancel_btn_id:
+        case R.id.btn_cancel:
 
             showToastMessage("Cancel Button Clicked");
             this.finish();
-
             break;
 
 
@@ -270,6 +277,36 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
     }
 
 
+    public void reaadingSharedValues()
+    {
+
+        sharedpreferences = getApplicationContext().getSharedPreferences(MainWidget.CheetatechPref, Context.MODE_PRIVATE);
+        int offHour = 0,offMin = 0,onHour = 0,onMin = 0;
+        offHour = sharedpreferences.getInt(MainWidget.OffHour, 0);
+        offMin = sharedpreferences.getInt(MainWidget.OffMin, 0);
+        onHour = sharedpreferences.getInt(MainWidget.OnHour, 0);
+        onMin = sharedpreferences.getInt(MainWidget.OnMin, 0);
+
+        widgetValues = new WidgetValues(offHour,offMin,onHour,onMin);
+
+        Log.e("TAG","Veriler "+offHour + " : "+ offMin + " : "+ onHour + " : "+onMin);
+
+    }
+
+    private void saveFileFunction()
+    {
+        int offHour = widgetValues.getIntOffHour();
+        int offMin = widgetValues.getIntOffMin();
+        int onHour = widgetValues.getIntOnHour();
+        int onMin = widgetValues.getIntOnMin();
+        sharedpreferences = getApplicationContext().getSharedPreferences(MainWidget.CheetatechPref, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putInt(MainWidget.OffHour,offHour);
+        editor.putInt(MainWidget.OffMin,offMin);
+        editor.putInt(MainWidget.OnHour,onHour);
+        editor.putInt(MainWidget.OnMin,onMin);
+        editor.commit();
+    }
 
 
     public void hideSoftKeyboard() {
