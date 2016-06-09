@@ -3,4 +3,8 @@
     <string name="action_settings">Settings</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="active_period">Mobile Data Active Period</string>
+    <string name="passive_period">Mobile Data Passive Period</string>
+    <string name="min">Min</string>
+    <string name="hour">Hour</string>
 </resources>
