@@ -1,26 +1,19 @@
 package layout;
 
-import android.app.Dialog;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.mobiledatatimerwidget.DialogActivity;
-import com.mobiledatatimerwidget.MainActivity;
 import com.mobiledatatimerwidget.R;
 
 /**
@@ -33,16 +26,13 @@ public class MainWidget extends AppWidgetProvider {
 
     private static final String ACTION_MINUS_CLICK = "com.mobiledatatimerwidget.action.MINUS_CLICK";
     private static final String ACTION_PLUS_CLICK = "com.mobiledatatimerwidget.action.PLUS_CLICK";
-    private static final String ACTION_STARTSTOP_CLICK = "com.mobiledatatimerwidget.action.STARTSTOP_CLICK";
-    private static final String ACTION_ONOFF_CLICK = "com.mobiledatatimerwidget.action.ONOFF_CLICK";
+    public static final String ACTION_STARTSTOP_CLICK = "com.mobiledatatimerwidget.action.STARTSTOP_CLICK";
+    public static final String ACTION_ONOFF_CLICK = "com.mobiledatatimerwidget.action.ONOFF_CLICK";
 
 
     private static int mCount = 0;
     private  static  int val = 0;
 
-    private static String getMessage() {
-        return String.valueOf(mCount++);
-    }
 
 
 
@@ -64,12 +54,25 @@ public class MainWidget extends AppWidgetProvider {
     private static int workState = 0; // stop
     private static int onTime = 1; // default
     private static int offTime = 1; // default
+    private static int onHour = 1; // default
+    private static int offHour = 1; // default
+    private static int onMin = 1; // default
+    private static int offMin = 1; // default
+
+
+    private static String offString = "";
+    private static String onString = "";
 
     private static int onTimeHold =1;
     private static int offTimeHold =1;
 
     private static int ac = 0;
     int vl = 1;
+
+    public static String getMessage(int hour,int min)
+    {
+        return new String(hour+" h : "+min + " m");
+    }
 
     private PendingIntent getPendingSelfIntent(Context context, String action) {
         // An explicit intent directed at the current class (the "self").
@@ -83,21 +86,32 @@ public class MainWidget extends AppWidgetProvider {
                          int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
 
-        String message = getMessage();
-
-
-
         sharedpreferences = context.getSharedPreferences(CheetatechPref, Context.MODE_PRIVATE);
         sharedpreferences.getInt(OffTime, offTime);
         sharedpreferences.getInt(OnTime, onTime);
+
+
+        offHour = sharedpreferences.getInt(OffHour, 0);
+        offMin = sharedpreferences.getInt(OffMin, 0);
+        onHour = sharedpreferences.getInt(OnHour, 0);
+        onMin = sharedpreferences.getInt(OnMin, 0);
+
+
+
         sharedpreferences.getInt(WorkState, workState);
         sharedpreferences.getInt(TimeState, timeState);
 
 
         Log.e("TAG","1 : "+ offTime );
         Log.e("TAG","2 : " + onTime);
-        Log.e("TAG","3 : "+  workState);
+        Log.e("TAG", "3 : " + workState);
         Log.e("TAG", "4 : " + timeState);
+        Log.e("TAG","1_1 : "+ offHour );
+        Log.e("TAG","2_2 : " + offMin);
+        Log.e("TAG","3_3 : "+  onHour);
+        Log.e("TAG", "4_4 : " + onMin);
+
+
 
         for (int appWidgetID : appWidgetIds) {
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
@@ -105,6 +119,9 @@ public class MainWidget extends AppWidgetProvider {
 
 
             Log.e("Deger", "" + onTimeHold + " :: " + offTimeHold);
+            remoteViews.setTextViewText(R.id.on_text, getMessage(onHour,onMin));
+            remoteViews.setTextViewText(R.id.off_text, getMessage(offHour,offMin));
+
             //remoteViews.setTextViewText(R.id.on_text, String.valueOf(onTimeHold));
             //remoteViews.setTextViewText(R.id.off_text, String.valueOf(offTimeHold));
 
@@ -135,7 +152,7 @@ public class MainWidget extends AppWidgetProvider {
 
 
             //remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
-            remoteViews.setOnClickPendingIntent(R.id.plus_button, getPendingSelfIntent(context, ACTION_PLUS_CLICK));
+            //remoteViews.setOnClickPendingIntent(R.id.plus_button, getPendingSelfIntent(context, ACTION_PLUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.start_stop_button,getPendingSelfIntent(context,ACTION_STARTSTOP_CLICK));
 
@@ -169,139 +186,27 @@ public class MainWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        Log.e("TAG", "Button Clicked");
-        if (ACTION_MINUS_CLICK.equals(intent.getAction())) {
-            openDialog(context);
-            decriment();
-            onUpdate(context);
-            Log.e("TAG", "Button Minus Clicked");
-
-        }
-
-        if (ACTION_PLUS_CLICK.equals(intent.getAction())) {
-            incremant();
-            SoftwareDialog dialog = new SoftwareDialog();
-            ac = 1;
-            dialog.show(MainActivity.fragmentManager, "SoftwareDialog");
-            onUpdate(context);
-            Log.e("TAG","Button Plus Clicked");
-
-        }
-
         if (ACTION_ONOFF_CLICK.equals(intent.getAction())) {
-
-            Log.e("TAG", "Button OnOff Clicked");
-
             sharedpreferences = context.getSharedPreferences(CheetatechPref, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
             timeState = (++timeState)%2;
             Log.e("TAG", "timestateChanged : " + timeState);
             editor.putInt(TimeState, timeState); // ya sifir ya bir olacak
             editor.commit();
-            changeButtonText(context);
-
+            //changeButtonText(context);
             onUpdate(context);
-
         }
 
         if (ACTION_STARTSTOP_CLICK.equals(intent.getAction())) {
 
             Log.e("TAG", "Button StartStop Clicked");
-            //sharedpreferences = context.getApplicationContext().getSharedPreferences(CheetatechPref,Context.MODE_PRIVATE);
-
             sharedpreferences = context.getSharedPreferences(CheetatechPref, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedpreferences.edit();
             workState = (++workState)%2;
             Log.e("TAG", "workstateChanged : " + workState);
             editor.putInt(WorkState, workState); // ya sifir ya bir olacak
             editor.commit();
-
-
-            Log.e("TAG","x1 : "+  sharedpreferences.getInt(OffTime, offTimeHold));
-            Log.e("TAG","x2 : " + sharedpreferences.getInt(OnTime, onTimeHold));
-            Log.e("TAG","x3 : "+  sharedpreferences.getInt(WorkState, workState));
-            Log.e("TAG","x4 : "+  sharedpreferences.getInt(TimeState, timeState));
-
             onUpdate(context);
-        }
-    }
-    public class FireMissilesDialogFragment extends DialogFragment {
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("Fire Miss??")
-                    .setPositiveButton("Fire", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
-                        }
-                    });
-            // Create the AlertDialog object and return it
-            return builder.create();
-        }
-    }
-    private void openDialog(Context context) {
-
-        /*
-        Intent i = new Intent(context, DialogActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-        context.startActivity(i);
-        */
-
-
-        //SoftwareDialog dialog = new SoftwareDialog();
-
-        //dialog.show(context.getApplicationContext());
-
-        //SoftwareDialog dialog = new SoftwareDialog();
-        ac = 1;
-        //dialog.show(getActivity().getSupportFragmentManager(), "SoftwareDialog");
-        /*
-        Intent i = new Intent(context, MainActivity.class);
-        i.putExtra(MainActivity.EXTRA_DEFAULT_FRAGMENT, MainActivity.FRAGMENT_DISCOVER);
-        PendingIntent pi = PendingIntent.getActivity(context, 0, i, 0);
-
-        */
-        /*
-        Intent launchActivity = new Intent(context,AndroidWidgetSample.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,0, launchActivity, 0);
-        remoteViews.setOnClickPendingIntent(R.id.widget, pendingIntent2);*/
-    }
-
-    private void incremant() {
-
-        if(timeState == 0) // kapali kalma süresi
-        {
-            if(++offTimeHold>60)
-                offTimeHold = 60;
-        }
-        if(timeState == 1) // acik kalma süresi
-        {
-            if(++onTimeHold>60)
-                onTimeHold = 60;
-        }
-    }
-
-    private void decriment() {
-
-
-        //FFB300
-        // 263238
-        if(timeState == 0) // kapali kalma süresi
-        {
-            if(--offTimeHold<1)
-                offTimeHold = 1;
-        }
-        if(timeState == 1) // acik kalma süresi
-        {
-            if(--onTimeHold<1)
-                onTimeHold = 1;
         }
     }
 
@@ -310,29 +215,18 @@ public class MainWidget extends AppWidgetProvider {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance
                 (context);
 
-        // Uses getClass().getName() rather than MyWidget.class.getName() for
-        // portability into any App Widget Provider Class
         ComponentName thisAppWidgetComponentName =
                 new ComponentName(context.getPackageName(),getClass().getName()
                 );
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
                 thisAppWidgetComponentName);
-        // Loop for every App Widget instance that belongs to this provider.
-        // Noting, that is, a user might have multiple instances of the same
-        // widget on
-        // their home screen.
+
         for (int appWidgetID : appWidgetIds) {
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.main_widget);
-            String[] nstr = new String[]{"OFF","ON"};
-            //remoteViews.setTextViewText(R.id.on_off_button, nstr[timeState]);
-
             remoteViews.setOnClickPendingIntent(R.id.start_stop_button, getPendingSelfIntent(context, ACTION_STARTSTOP_CLICK));
-            remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
-            remoteViews.setOnClickPendingIntent(R.id.plus_button,getPendingSelfIntent(context,ACTION_PLUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
             appWidgetManager.updateAppWidget(appWidgetID, remoteViews);
-
         }
     }
 

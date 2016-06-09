@@ -1,7 +1,11 @@
 package com.mobiledatatimerwidget;
 
 import android.app.Activity;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -223,6 +227,7 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
 
             showToastMessage("Ok Button Clicked");
             saveFileFunction();
+            updateWidgetValues();
             this.finish();
             break;
 
@@ -289,7 +294,7 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
 
         widgetValues = new WidgetValues(offHour,offMin,onHour,onMin);
 
-        Log.e("TAG","Veriler "+offHour + " : "+ offMin + " : "+ onHour + " : "+onMin);
+        Log.e("TAG", "Veriler " + offHour + " : " + offMin + " : " + onHour + " : " + onMin);
 
     }
 
@@ -326,5 +331,40 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
         if(widgetValues==null)
             return;
         binding.setWidgetValue(widgetValues);
+    }
+
+    private void updateWidgetValues()
+    {
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), MainWidget.class));
+        MainWidget myWidget = new MainWidget();
+        myWidget.onUpdate(this, AppWidgetManager.getInstance(this),ids);
+        /*
+        Context context = this;
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance
+                (context);
+
+        ComponentName thisAppWidgetComponentName =
+                new ComponentName(context.getPackageName(),getClass().getName()
+                );
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
+                thisAppWidgetComponentName);
+
+        for (int appWidgetID : appWidgetIds) {
+            RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+                    R.layout.main_widget);
+
+            remoteViews.setTextViewText(R.id.on_text, MainWidget.getMessage(widgetValues.getIntOnHour(), widgetValues.getIntOnMin()));
+            remoteViews.setTextViewText(R.id.off_text, MainWidget.getMessage(widgetValues.getIntOffHour(), widgetValues.getIntOffMin()));
+            remoteViews.setOnClickPendingIntent(R.id.start_stop_button, getPendingSelfIntent(context, MainWidget.ACTION_STARTSTOP_CLICK));
+            remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,MainWidget.ACTION_ONOFF_CLICK));
+            appWidgetManager.updateAppWidget(appWidgetID, remoteViews);
+        }
+        */
+    }
+    private PendingIntent getPendingSelfIntent(Context context, String action) {
+        // An explicit intent directed at the current class (the "self").
+        Intent intent = new Intent(context, getClass());
+        intent.setAction(action);
+        return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
 }
