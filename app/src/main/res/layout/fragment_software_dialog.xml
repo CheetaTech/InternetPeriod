@@ -46,20 +46,21 @@
 
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:gravity="center_vertical|center_horizontal"
-                android:hint="@string/active_period"
-                android:text="@string/active_period"
+                android:hint="@string/passive_period"
+                android:text="@string/passive_period"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
-                android:inputType="number"
+                android:inputType="none"
                 android:maxLength="250"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 android:textSize="70sp"
                 android:layout_weight="1"
                 android:editable="false"
+                android:clickable="false"
                 />
         </LinearLayout>
 
@@ -76,28 +77,29 @@
                 android:id="@+id/etxtHour"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/hour"
                 android:text="@string/hour"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
-                android:inputType="number"
+                android:inputType="none"
                 android:maxLength="4"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 android:textSize="70sp"
                 android:layout_weight="1"
                 android:editable="false"
+                android:clickable="false"
                 />
             <com.mobiledatatimerwidget.AutoSize.AutoFitEditText
 
                 android:id="@+id/etxtMin"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/min"
                 android:text="@string/min"
@@ -110,6 +112,7 @@
                 android:textSize="70sp"
                 android:layout_weight="1"
                 android:editable="false"
+                android:clickable="false"
                 />
         </LinearLayout>
 
@@ -231,10 +234,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:divider="?android:dividerHorizontal"
             android:showDividers="end"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
+            android:layout_marginRight="5dp"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -343,11 +346,11 @@
             <com.mobiledatatimerwidget.AutoSize.AutoFitEditText
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:gravity="center_vertical|center_horizontal"
-                android:hint="@string/passive_period"
-                android:text="@string/passive_period"
+                android:hint="@string/active_period"
+                android:text="@string/active_period"
                 android:textStyle="bold"
                 android:isScrollContainer="false"
                 android:inputType="number"
@@ -357,7 +360,7 @@
                 android:textSize="70sp"
                 android:layout_weight="1"
                 android:editable="false"
-
+                android:clickable="false"
                 />
         </LinearLayout>
 
@@ -373,8 +376,8 @@
 
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/hour"
                 android:text="@string/hour"
@@ -387,12 +390,13 @@
                 android:textSize="70sp"
                 android:layout_weight="1"
                 android:editable="false"
+                android:clickable="false"
                 />
             <com.mobiledatatimerwidget.AutoSize.AutoFitEditText
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:gravity="center_vertical|center_horizontal"
                 android:hint="@string/min"
                 android:text="@string/min"
@@ -405,6 +409,7 @@
                 android:textSize="70sp"
                 android:layout_weight="1"
                 android:editable="false"
+                android:clickable="false"
                 />
         </LinearLayout>
 
@@ -540,7 +545,7 @@
             android:orientation="vertical"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
-
+            android:layout_marginRight="5dp"
             >
 
             <LinearLayout

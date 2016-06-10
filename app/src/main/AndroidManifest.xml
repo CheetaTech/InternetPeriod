@@ -36,6 +36,7 @@
             android:name=".DialogActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
             >
         </activity>
 
