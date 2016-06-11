@@ -1,5 +1,7 @@
 package com.mobiledatatimerwidget;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,8 +9,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +25,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.mobiledatatimerwidget.AutoSize.AutoFitEditText;
 import com.mobiledatatimerwidget.AutoSize.AutoFitEditTextUtil;
 import com.mobiledatatimerwidget.databinding.FragmentSoftwareDialogBinding;
@@ -26,13 +36,13 @@ import com.mobiledatatimerwidget.echo.onBinding;
 
 import layout.MainWidget;
 
-public class DialogActivity extends Activity implements OnClickListener ,onBinding{
+public class DialogActivity extends Activity implements OnClickListener, onBinding {
 
-    Button ok_btn , cancel_btn;
+    Button ok_btn, cancel_btn;
     AutoResizeEditText mAutoResizeEditText = null;
     AutoFitEditText etxtOffHour = null;
     AutoFitEditText etxtOffMin = null;
-    AutoFitEditText etxtOnHour= null;
+    AutoFitEditText etxtOnHour = null;
     AutoFitEditText etxtOnMin = null;
     LinearLayout mRootView;
     WidgetValues widgetValues = null;
@@ -41,70 +51,85 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
 
 
     FragmentSoftwareDialogBinding binding = null;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void insertDummyContactWrapper() {
+        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(DialogActivity.this,Manifest.permission.MODIFY_PHONE_STATE);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(DialogActivity.this, new String[]{Manifest.permission.MODIFY_PHONE_STATE}, REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         //setContentView(R.fragment_software_dialog);
-
+        insertDummyContactWrapper();
 
 
         reaadingSharedValues();
 
-        binding = DataBindingUtil.setContentView(this,R.layout.fragment_software_dialog);
+        binding = DataBindingUtil.setContentView(this, R.layout.fragment_software_dialog);
         //widgetValues  = new WidgetValues("1","2","3","4","5","6");
         //widgetValues.setListener(this);
         binding.setWidgetValue(widgetValues);
-        mRootView = (LinearLayout)findViewById(R.id.rlRoot);
+        mRootView = (LinearLayout) findViewById(R.id.rlRoot);
         loadButton();
         loadEditText();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
-    private int checkValue(int id,int value)
-    {
+    private int checkValue(int id, int value) {
         switch (id) {
             case R.id.btnOffHourPlus:
-                    value++;
-                return (value>23)?23:value;
+                value++;
+                return (value > 23) ? 23 : value;
             case R.id.btnOffHourMinus:
-                    value--;
-                return (value<0)?0:value;
+                value--;
+                return (value < 0) ? 0 : value;
             case R.id.btnOffMinPlus:
                 value++;
-                return (value>59)?59:value;
+                return (value > 59) ? 59 : value;
             case R.id.btnOffMinMinus:
                 value--;
-                return (value<0)?0:value;
+                return (value < 0) ? 0 : value;
             case R.id.btnOnHourPlus:
                 value++;
-                return (value>23)?23:value;
+                return (value > 23) ? 23 : value;
             case R.id.btnOnHourMinus:
                 value--;
-                return (value<0)?0:value;
+                return (value < 0) ? 0 : value;
             case R.id.btnOnMinPlus:
                 value++;
-                return (value>59)?59:value;
+                return (value > 59) ? 59 : value;
             case R.id.btnOnMinMinus:
                 value--;
-                return (value<0)?0:value;
+                return (value < 0) ? 0 : value;
         }
         return -1;
     }
 
-    private void controlEditText(int id,String textValue)
-    {
+    private void controlEditText(int id, String textValue) {
         int value;
         try {
             value = Integer.parseInt(textValue);
-        }catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             value = 1;
         }
 
 
-        switch (id)
-        {
+        switch (id) {
             case R.id.btnOffHourPlus:
                 widgetValues.setOffHour(checkValue(R.id.btnOffHourPlus, value));
                 binding.setWidgetValue(widgetValues);
@@ -140,41 +165,38 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
         }
 
 
-
     }
 
 
-    private void loadEditText()
-    {
+    private void loadEditText() {
 
-        etxtOffHour = (AutoFitEditText)findViewById(R.id.etxtOffHour);
-        etxtOffMin =(AutoFitEditText)findViewById(R.id.etxtOffMin);
-        etxtOnHour=(AutoFitEditText)findViewById(R.id.etxtOnHour);
-        etxtOnMin =(AutoFitEditText)findViewById(R.id.etxtOnMin);
+        etxtOffHour = (AutoFitEditText) findViewById(R.id.etxtOffHour);
+        etxtOffMin = (AutoFitEditText) findViewById(R.id.etxtOffMin);
+        etxtOnHour = (AutoFitEditText) findViewById(R.id.etxtOnHour);
+        etxtOnMin = (AutoFitEditText) findViewById(R.id.etxtOnMin);
 
         initAutoFitEditText(etxtOffHour);
         initAutoFitEditText(etxtOffMin);
         initAutoFitEditText(etxtOnHour);
         initAutoFitEditText(etxtOnMin);
     }
-    private void loadButton()
-    {
+
+    private void loadButton() {
         ok_btn = (Button) findViewById(R.id.btn_save);
         cancel_btn = (Button) findViewById(R.id.btn_cancel);
         ok_btn.setOnClickListener(this);
         cancel_btn.setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOffHourPlus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOffHourMinus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOffMinPlus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOffMinMinus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOnHourPlus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOnHourMinus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOnMinPlus)).setOnClickListener(this);
-        ((ImageButton)findViewById(R.id.btnOnMinMinus)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.btnOffHourPlus)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.btnOffHourMinus)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.btnOffMinPlus)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.btnOffMinMinus)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.btnOnHourPlus)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.btnOnHourMinus)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.btnOnMinPlus)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.btnOnMinMinus)).setOnClickListener(this);
     }
 
-    private void initAutoFitEditText(AutoFitEditText autoFitEditText)
-    {
+    private void initAutoFitEditText(AutoFitEditText autoFitEditText) {
         autoFitEditText.setEnabled(true);
         autoFitEditText.setFocusableInTouchMode(true);
         autoFitEditText.setFocusable(true);
@@ -188,8 +210,8 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
 
         AutoFitEditTextUtil.setNormalization(this, mRootView, autoFitEditText);
     }
-    private void initAutoFitEditText(View RootView,AutoFitEditText autoFitEditText)
-    {
+
+    private void initAutoFitEditText(View RootView, AutoFitEditText autoFitEditText) {
         autoFitEditText.setEnabled(true);
         autoFitEditText.setFocusableInTouchMode(true);
         autoFitEditText.setFocusable(true);
@@ -203,6 +225,7 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
 
         AutoFitEditTextUtil.setNormalization(this, RootView, autoFitEditText);
     }
+
     /*
     public void initAutoFitEditText() {
 
@@ -223,48 +246,48 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
     public void onClick(View v) {
 
         switch (v.getId()) {
-        case R.id.btn_save:
+            case R.id.btn_save:
 
-            showToastMessage("Ok Button Clicked");
-            saveFileFunction();
-            updateWidgetValues();
-            this.finish();
-            break;
+                showToastMessage("Ok Button Clicked");
+                saveFileFunction();
+                updateWidgetValues();
+                this.finish();
+                break;
 
-        case R.id.btn_cancel:
+            case R.id.btn_cancel:
 
-            showToastMessage("Cancel Button Clicked");
-            this.finish();
-            break;
+                showToastMessage("Cancel Button Clicked");
+                this.finish();
+                break;
 
 
-        case R.id.btnOffHourPlus:
-            //Log.e("TAG", "Value is " + widgetValues.getOffMin().toString() + " :: " + widgetValues.getOffHour().toString());
+            case R.id.btnOffHourPlus:
+                //Log.e("TAG", "Value is " + widgetValues.getOffMin().toString() + " :: " + widgetValues.getOffHour().toString());
 
-            controlEditText(R.id.btnOffHourPlus, widgetValues.getOffHour().toString());
-            break;
+                controlEditText(R.id.btnOffHourPlus, widgetValues.getOffHour().toString());
+                break;
 
-        case R.id.btnOffHourMinus:
-            controlEditText(R.id.btnOffHourMinus,widgetValues.getOffHour().toString());
-            break;
-        case R.id.btnOffMinPlus:
-            controlEditText(R.id.btnOffMinPlus,widgetValues.getOffMin().toString());
-            break;
-        case R.id.btnOffMinMinus:
-            controlEditText(R.id.btnOffMinMinus,widgetValues.getOffMin().toString());
-            break;
-        case R.id.btnOnHourPlus:
-            controlEditText(R.id.btnOnHourPlus,widgetValues.getOnHour().toString());
-            break;
-        case R.id.btnOnHourMinus:
-            controlEditText(R.id.btnOnHourMinus,widgetValues.getOnHour().toString());
-            break;
-        case R.id.btnOnMinPlus:
-            controlEditText(R.id.btnOnMinPlus,widgetValues.getOnMin().toString());
-            break;
-        case R.id.btnOnMinMinus:
-            controlEditText(R.id.btnOnMinMinus,widgetValues.getOnMin().toString());
-            break;
+            case R.id.btnOffHourMinus:
+                controlEditText(R.id.btnOffHourMinus, widgetValues.getOffHour().toString());
+                break;
+            case R.id.btnOffMinPlus:
+                controlEditText(R.id.btnOffMinPlus, widgetValues.getOffMin().toString());
+                break;
+            case R.id.btnOffMinMinus:
+                controlEditText(R.id.btnOffMinMinus, widgetValues.getOffMin().toString());
+                break;
+            case R.id.btnOnHourPlus:
+                controlEditText(R.id.btnOnHourPlus, widgetValues.getOnHour().toString());
+                break;
+            case R.id.btnOnHourMinus:
+                controlEditText(R.id.btnOnHourMinus, widgetValues.getOnHour().toString());
+                break;
+            case R.id.btnOnMinPlus:
+                controlEditText(R.id.btnOnMinPlus, widgetValues.getOnMin().toString());
+                break;
+            case R.id.btnOnMinMinus:
+                controlEditText(R.id.btnOnMinMinus, widgetValues.getOnMin().toString());
+                break;
         }
 
 
@@ -282,34 +305,32 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
     }
 
 
-    public void reaadingSharedValues()
-    {
+    public void reaadingSharedValues() {
 
         sharedpreferences = getApplicationContext().getSharedPreferences(MainWidget.CheetatechPref, Context.MODE_PRIVATE);
-        int offHour = 0,offMin = 0,onHour = 0,onMin = 0;
+        int offHour = 0, offMin = 0, onHour = 0, onMin = 0;
         offHour = sharedpreferences.getInt(MainWidget.OffHour, 0);
         offMin = sharedpreferences.getInt(MainWidget.OffMin, 0);
         onHour = sharedpreferences.getInt(MainWidget.OnHour, 0);
         onMin = sharedpreferences.getInt(MainWidget.OnMin, 0);
 
-        widgetValues = new WidgetValues(offHour,offMin,onHour,onMin);
+        widgetValues = new WidgetValues(offHour, offMin, onHour, onMin);
 
         Log.e("TAG", "Veriler " + offHour + " : " + offMin + " : " + onHour + " : " + onMin);
 
     }
 
-    private void saveFileFunction()
-    {
+    private void saveFileFunction() {
         int offHour = widgetValues.getIntOffHour();
         int offMin = widgetValues.getIntOffMin();
         int onHour = widgetValues.getIntOnHour();
         int onMin = widgetValues.getIntOnMin();
         sharedpreferences = getApplicationContext().getSharedPreferences(MainWidget.CheetatechPref, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putInt(MainWidget.OffHour,offHour);
-        editor.putInt(MainWidget.OffMin,offMin);
-        editor.putInt(MainWidget.OnHour,onHour);
-        editor.putInt(MainWidget.OnMin,onMin);
+        editor.putInt(MainWidget.OffHour, offHour);
+        editor.putInt(MainWidget.OffMin, offMin);
+        editor.putInt(MainWidget.OnHour, onHour);
+        editor.putInt(MainWidget.OnMin, onMin);
         editor.commit();
     }
 
@@ -326,18 +347,17 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
 
     @Override
     public void onBindingAccept() {
-        if(binding==null)
+        if (binding == null)
             return;
-        if(widgetValues==null)
+        if (widgetValues == null)
             return;
         binding.setWidgetValue(widgetValues);
     }
 
-    private void updateWidgetValues()
-    {
+    private void updateWidgetValues() {
         int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), MainWidget.class));
         MainWidget myWidget = new MainWidget();
-        myWidget.onUpdate(this, AppWidgetManager.getInstance(this),ids);
+        myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids);
         /*
         Context context = this;
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance
@@ -361,10 +381,51 @@ public class DialogActivity extends Activity implements OnClickListener ,onBindi
         }
         */
     }
+
     private PendingIntent getPendingSelfIntent(Context context, String action) {
         // An explicit intent directed at the current class (the "self").
         Intent intent = new Intent(context, getClass());
         intent.setAction(action);
         return PendingIntent.getBroadcast(context, 0, intent, 0);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Dialog Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.mobiledatatimerwidget/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Dialog Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://com.mobiledatatimerwidget/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 }

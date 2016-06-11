@@ -15,6 +15,8 @@ import android.widget.RemoteViews;
 
 import com.mobiledatatimerwidget.DialogActivity;
 import com.mobiledatatimerwidget.R;
+import com.mobiledatatimerwidget.SPreferences;
+import com.mobiledatatimerwidget.hardwareClasses.MobileDataClass;
 
 /**
  * Implementation of App Widget functionality.
@@ -66,14 +68,17 @@ public class MainWidget extends AppWidgetProvider {
     private static int onTimeHold =1;
     private static int offTimeHold =1;
 
+    private Context context = null;
     private static int ac = 0;
     int vl = 1;
+    public static int offTimeMin = 1;
+    public static int onTimeMin = 1;
+
 
     public static String getMessage(int hour,int min)
     {
         return new String(hour+" h : "+min + " m");
     }
-
     private PendingIntent getPendingSelfIntent(Context context, String action) {
         // An explicit intent directed at the current class (the "self").
         Intent intent = new Intent(context, getClass());
@@ -81,10 +86,30 @@ public class MainWidget extends AppWidgetProvider {
         return PendingIntent.getBroadcast(context, 0, intent, 0);
     }
 
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
+    /*
+    @TargetApi(Build.VERSION_CODES.M)
+    private void insertDummyContactWrapper() {
+        //Activity activity = (Activity)this.context;
+        Activity activity = context.
+        int hasWriteContactsPermission = activity.checkSelfPermission(Manifest.permission.MODIFY_PHONE_STATE);
+        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainWidget.this,new String[]{MODIFY_PHONE_STATE}, REQUEST_CODE_ASK_PERMISSIONS);
+            return;
+        }
+    }*/
+
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
+        this.context = context;
+
+        //insertDummyContactWrapper();
+
+
 
         sharedpreferences = context.getSharedPreferences(CheetatechPref, Context.MODE_PRIVATE);
         sharedpreferences.getInt(OffTime, offTime);
@@ -165,9 +190,7 @@ public class MainWidget extends AppWidgetProvider {
             Bitmap[] bitmaps = new Bitmap[]{startBitmap,stopBitmap};
             //workState = (workState+1) %2;
             remoteViews.setImageViewBitmap(R.id.start_stop_button, bitmaps[workState]);
-
             appWidgetManager.updateAppWidget(appWidgetID, remoteViews);
-
         }
     }
 
@@ -207,9 +230,53 @@ public class MainWidget extends AppWidgetProvider {
             editor.putInt(WorkState, workState); // ya sifir ya bir olacak
             editor.commit();
             onUpdate(context);
+
+            if(workState == 1) // work
+            {
+                startSystem();
+                Log.e("STARTTIME","Starttime is working...");
+            }else{
+                stopSystem();
+                Log.e("STOPTIME", "Stop is working...");
+            }
+
         }
     }
 
+    private void startSystem() {
+        SPreferences pref = new SPreferences(this.context);
+        offTimeMin = calculateMin(pref.getInteger(OffHour),pref.getInteger(OffMin));
+        onTimeMin = calculateMin(pref.getInteger(OnHour),pref.getInteger(OnMin));
+        MobileDataClass mobileDataClass = new MobileDataClass(this.context);
+        mobileDataClass.setAlarm(onTimeMin,this.context); // calismasini baslattik. Oncelik acik kalma süresi.
+    }
+
+    private int calculateMin(int hour,int min)
+    {
+        if(hour==-1) hour = 0;
+        if(min == -1 ) min = 1;
+        return ((60*hour) + min);
+    }
+    private int calculateOffTime(SPreferences pref)
+    {
+        int hour = pref.getInteger(OffHour);
+        int min = pref.getInteger(OffMin);
+        if(hour==-1) hour = 0;
+        if(min == -1 ) min = 1;
+        return ((60*hour) + min);
+    }
+    private int calculateOnTime(SPreferences pref)
+    {
+        int hour = pref.getInteger(OnHour);
+        int min = pref.getInteger(OnMin);
+        if(hour==-1) hour = 0;
+        if(min == -1 ) min = 1;
+        return ((60*hour) + min);
+    }
+    private void stopSystem() {
+        MobileDataClass mobileDataClass = new MobileDataClass(this.context);
+        mobileDataClass.destroyAlarm(this.context);
+    }
     private void changeButtonText(Context context) {
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance
