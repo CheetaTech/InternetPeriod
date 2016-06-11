@@ -1,5 +1,7 @@
 package layout;
 
+
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -7,16 +9,23 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.mobiledatatimerwidget.DialogActivity;
 import com.mobiledatatimerwidget.R;
 import com.mobiledatatimerwidget.SPreferences;
 import com.mobiledatatimerwidget.hardwareClasses.MobileDataClass;
+import com.mobiledatatimerwidget.hardwareClasses.MobileDataController;
+
+import static android.Manifest.permission.*;
 
 /**
  * Implementation of App Widget functionality.
@@ -107,6 +116,7 @@ public class MainWidget extends AppWidgetProvider {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         this.context = context;
 
+        //ask(context);
         //insertDummyContactWrapper();
 
 
@@ -194,6 +204,21 @@ public class MainWidget extends AppWidgetProvider {
         }
     }
 
+    private void ask(Context context) {
+
+        if(ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(context,"Grantedddd",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity)context,WRITE_EXTERNAL_STORAGE)) {
+                Toast.makeText(context, "Rationale", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(context, "ASkkkkkkkk", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void onUpdate(Context context) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance
                 (context);
@@ -247,12 +272,17 @@ public class MainWidget extends AppWidgetProvider {
         SPreferences pref = new SPreferences(this.context);
         offTimeMin = calculateMin(pref.getInteger(OffHour),pref.getInteger(OffMin));
         onTimeMin = calculateMin(pref.getInteger(OnHour),pref.getInteger(OnMin));
+        Log.e("TAG","Offtime "+offTimeMin + " OnTimeMin "+ onTimeMin );
         MobileDataClass mobileDataClass = new MobileDataClass(this.context);
+        MobileDataController mobileDataController = new MobileDataController(context);
+        if(mobileDataController.getCurrentState() == false)
+            mobileDataController.turnOn();
         mobileDataClass.setAlarm(onTimeMin,this.context); // calismasini baslattik. Oncelik acik kalma süresi.
     }
 
-    private int calculateMin(int hour,int min)
+    public static int calculateMin(int hour,int min)
     {
+        Log.e("TAG","Hour " + hour + " min "+ min );
         if(hour==-1) hour = 0;
         if(min == -1 ) min = 1;
         return ((60*hour) + min);

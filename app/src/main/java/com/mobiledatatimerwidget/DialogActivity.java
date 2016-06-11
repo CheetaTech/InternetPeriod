@@ -36,6 +36,8 @@ import com.mobiledatatimerwidget.echo.onBinding;
 
 import layout.MainWidget;
 
+import static android.Manifest.permission.MODIFY_PHONE_STATE;
+
 public class DialogActivity extends Activity implements OnClickListener, onBinding {
 
     Button ok_btn, cancel_btn;
@@ -67,13 +69,47 @@ public class DialogActivity extends Activity implements OnClickListener, onBindi
         }
     }
 
+    private void ask(Context context) {
+
+        if(ContextCompat.checkSelfPermission(context, MODIFY_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(context,"Grantedddd",Toast.LENGTH_SHORT).show();
+            Log.e("TAG","Granted");
+        }
+        else {
+            Log.e("TAG","Not Granted");
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(DialogActivity.this,MODIFY_PHONE_STATE)) {
+                Toast.makeText(context, "Rationale", Toast.LENGTH_SHORT).show();
+            }
+            Toast.makeText(context, "ASkkkkkkkk", Toast.LENGTH_SHORT).show();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.MODIFY_PHONE_STATE},REQUEST_CODE_ASK_PERMISSIONS);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,String[] permission,int [] grantResult)
+    {
+        if(requestCode == REQUEST_CODE_ASK_PERMISSIONS)
+        {
+            if(grantResult[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(this, "OKKKK GRANTED", Toast.LENGTH_LONG).show();
+            }else
+                Toast.makeText(this, "NOTTT GRANTED", Toast.LENGTH_LONG).show();
+        }else
+            super.onRequestPermissionsResult(requestCode,permission,grantResult);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         //setContentView(R.fragment_software_dialog);
-        insertDummyContactWrapper();
-
+        //insertDummyContactWrapper();
+        ask(this);
 
         reaadingSharedValues();
 

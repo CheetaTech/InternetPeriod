@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import layout.MainWidget;
 
@@ -24,13 +25,14 @@ public class MobileDataClass {
     }
 
     public void setAlarm(int time,Context context){
+        Log.e("TAG","setAlarmValue : "+time);
         Intent in = new Intent(context,MobileDataReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context,13,in,0);                //Request code 13, bununla tanıyoruz
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+time*1000*60,pi);
-
     }
     public void updateAlarm(int time,Context context){
+        Log.e("TAG","setAlarmValue : "+time);
         Intent in = new Intent(context,MobileDataReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context,13,in,PendingIntent.FLAG_UPDATE_CURRENT);                //Request code 13, bununla tanıyoruz
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);

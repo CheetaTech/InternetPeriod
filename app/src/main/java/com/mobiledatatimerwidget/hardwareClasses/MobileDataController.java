@@ -47,6 +47,28 @@ public class MobileDataController
         return currentState;
     }
 
+    public boolean turnOn()
+    {
+        try
+        {
+            this.setMobileDataEnabledMethod.invoke(this.connectivityManager, true);
+        }
+        catch(Exception ex)
+        {return false;}
+        return true;
+    }
+
+    public boolean turnOff()
+    {
+        try
+        {
+            this.setMobileDataEnabledMethod.invoke(this.connectivityManager, false);
+        }
+        catch(Exception ex)
+        {return false;}
+        return true;
+    }
+
     public boolean getCurrentState()
     {
         boolean state = false;
@@ -59,6 +81,9 @@ public class MobileDataController
 
         return state;
     }
+
+
+
 
     public static MobileDataController getInstance(Context context)
     {
