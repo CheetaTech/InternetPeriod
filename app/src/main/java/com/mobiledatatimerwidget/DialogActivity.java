@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +39,7 @@ import layout.MainWidget;
 
 import static android.Manifest.permission.MODIFY_PHONE_STATE;
 
-public class DialogActivity extends Activity implements OnClickListener, onBinding {
+public class DialogActivity extends FragmentActivity implements OnClickListener, onBinding {
 
     Button ok_btn, cancel_btn;
     AutoResizeEditText mAutoResizeEditText = null;
@@ -46,6 +47,7 @@ public class DialogActivity extends Activity implements OnClickListener, onBindi
     AutoFitEditText etxtOffMin = null;
     AutoFitEditText etxtOnHour = null;
     AutoFitEditText etxtOnMin = null;
+
     LinearLayout mRootView;
     WidgetValues widgetValues = null;
     private SharedPreferences sharedpreferences;
@@ -230,6 +232,7 @@ public class DialogActivity extends Activity implements OnClickListener, onBindi
         ((ImageButton) findViewById(R.id.btnOnHourMinus)).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.btnOnMinPlus)).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.btnOnMinMinus)).setOnClickListener(this);
+        ((ImageButton) findViewById(R.id.btn_info)).setOnClickListener(this);
     }
 
     private void initAutoFitEditText(AutoFitEditText autoFitEditText) {
@@ -283,20 +286,15 @@ public class DialogActivity extends Activity implements OnClickListener, onBindi
 
         switch (v.getId()) {
             case R.id.btn_save:
-
                 showToastMessage("Ok Button Clicked");
                 saveFileFunction();
                 updateWidgetValues();
                 this.finish();
                 break;
-
             case R.id.btn_cancel:
-
                 showToastMessage("Cancel Button Clicked");
                 this.finish();
                 break;
-
-
             case R.id.btnOffHourPlus:
                 //Log.e("TAG", "Value is " + widgetValues.getOffMin().toString() + " :: " + widgetValues.getOffHour().toString());
 
@@ -324,9 +322,10 @@ public class DialogActivity extends Activity implements OnClickListener, onBindi
             case R.id.btnOnMinMinus:
                 controlEditText(R.id.btnOnMinMinus, widgetValues.getOnMin().toString());
                 break;
+            case R.id.btn_info:
+                (new InfoFragment()).show(getSupportFragmentManager(),",Info Dialog");
+                break;
         }
-
-
     }
 
     @Override
