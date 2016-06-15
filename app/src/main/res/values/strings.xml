@@ -1,13 +1,19 @@
 <resources>
-    <string name="app_name">Net Guardian</string>
-    <string name="app_name2">Net Guardian</string>
+    <string name="app_name">Internet Period</string>
+    <string name="app_name2">Internet Period</string>
     <string name="action_settings">Settings</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Internet Period</string>
     <string name="add_widget">Add widget</string>
     <string name="active_period">Mobile Data Active Period</string>
     <string name="passive_period">Mobile Data Passive Period</string>
     <string name="min">Min</string>
     <string name="hour">Hour</string>
     <string name="quit">QUIT</string>
+    <string name="info_text">
+        This application allows you to control your mobile data with time.\n\n
+        You can set its "Off time" and "On time" and start it on widget.\n\n
+        If you start this application, your mobile data open and close every setted time periodically.
+    </string>
+    <string name="usage">Internet Period Usage</string>
     
 </resources>
