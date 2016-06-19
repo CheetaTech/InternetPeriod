@@ -15,5 +15,9 @@
         If you start this application, your mobile data open and close every setted time periodically.
     </string>
     <string name="usage">Internet Period Usage</string>
+    <string name="work_error">VERSION ERROR!!!</string>
+    <string name="error_info">
+        This process does not provide for this Android version.\nIt must be API 19 or lower.
+    </string>
     
 </resources>

@@ -1,7 +1,6 @@
 package layout;
 
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -9,23 +8,19 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import com.mobiledatatimerwidget.DialogActivity;
+import com.mobiledatatimerwidget.ErrorActivity;
 import com.mobiledatatimerwidget.R;
 import com.mobiledatatimerwidget.SPreferences;
 import com.mobiledatatimerwidget.hardwareClasses.MobileDataClass;
 import com.mobiledatatimerwidget.hardwareClasses.MobileDataController;
-
-import static android.Manifest.permission.*;
 
 /**
  * Implementation of App Widget functionality.
@@ -97,17 +92,7 @@ public class MainWidget extends AppWidgetProvider {
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
-    /*
-    @TargetApi(Build.VERSION_CODES.M)
-    private void insertDummyContactWrapper() {
-        //Activity activity = (Activity)this.context;
-        Activity activity = context.
-        int hasWriteContactsPermission = activity.checkSelfPermission(Manifest.permission.MODIFY_PHONE_STATE);
-        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainWidget.this,new String[]{MODIFY_PHONE_STATE}, REQUEST_CODE_ASK_PERMISSIONS);
-            return;
-        }
-    }*/
+
 
 
     @Override
@@ -179,17 +164,40 @@ public class MainWidget extends AppWidgetProvider {
             remoteViews.setOnClickPendingIntent(R.id.minus_button, pendingIntent);
             */
 
+
+            if((Build.VERSION.SDK_INT > 19) )
+            {
+                Intent i = new Intent(context, ErrorActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, 0);
+                remoteViews.setOnClickPendingIntent(R.id.minus_button, pendingIntent);
+            }else {
+                Intent i2 = new Intent(context, DialogActivity.class);
+                PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 0, i2, 0);
+                remoteViews.setOnClickPendingIntent(R.id.minus_button, pendingIntent2);
+            }
+
+            /*
             Intent i = new Intent(context, DialogActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, 0);
-            //i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             remoteViews.setOnClickPendingIntent(R.id.minus_button, pendingIntent);
+            */
+
 
 
 
             //remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
             //remoteViews.setOnClickPendingIntent(R.id.plus_button, getPendingSelfIntent(context, ACTION_PLUS_CLICK));
             remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
-            remoteViews.setOnClickPendingIntent(R.id.start_stop_button,getPendingSelfIntent(context,ACTION_STARTSTOP_CLICK));
+
+            if((Build.VERSION.SDK_INT > 19) )
+            {
+                Intent i2 = new Intent(context, ErrorActivity.class);
+                PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 0, i2, 0);
+                remoteViews.setOnClickPendingIntent(R.id.start_stop_button, pendingIntent2);
+            }else {
+                remoteViews.setOnClickPendingIntent(R.id.start_stop_button,getPendingSelfIntent(context,ACTION_STARTSTOP_CLICK));
+            }
+
 
 
             Drawable startDrawable = context.getResources().getDrawable(R.drawable.ic_startbutton_96_96_white);
@@ -204,20 +212,7 @@ public class MainWidget extends AppWidgetProvider {
         }
     }
 
-    private void ask(Context context) {
 
-        if(ContextCompat.checkSelfPermission(context, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
-        {
-            Toast.makeText(context,"Grantedddd",Toast.LENGTH_SHORT).show();
-        }
-        else {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity)context,WRITE_EXTERNAL_STORAGE)) {
-                Toast.makeText(context, "Rationale", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Toast.makeText(context, "ASkkkkkkkk", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void onUpdate(Context context) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance
@@ -246,6 +241,7 @@ public class MainWidget extends AppWidgetProvider {
         }
 
         if (ACTION_STARTSTOP_CLICK.equals(intent.getAction())) {
+
 
             Log.e("TAG", "Button StartStop Clicked");
             sharedpreferences = context.getSharedPreferences(CheetatechPref, Context.MODE_PRIVATE);

@@ -2,14 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobiledatatimerwidget">
 
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <uses-permission-sdk-23 android:name="android.permission.MODIFY_PHONE_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"></uses-permission>
-
 
     <application
         android:allowBackup="true"
@@ -43,6 +41,14 @@
 
         <activity
             android:name=".DialogActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity
+            android:name=".ErrorActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait"

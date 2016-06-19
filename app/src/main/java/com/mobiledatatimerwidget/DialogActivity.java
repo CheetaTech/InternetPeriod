@@ -1,7 +1,5 @@
 package com.mobiledatatimerwidget;
 
-import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -9,14 +7,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,8 +31,6 @@ import com.mobiledatatimerwidget.echo.WidgetValues;
 import com.mobiledatatimerwidget.echo.onBinding;
 
 import layout.MainWidget;
-
-import static android.Manifest.permission.MODIFY_PHONE_STATE;
 
 public class DialogActivity extends FragmentActivity implements OnClickListener, onBinding {
 
@@ -62,69 +55,31 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
      */
     private GoogleApiClient client;
 
-    @TargetApi(Build.VERSION_CODES.M)
-    private void insertDummyContactWrapper() {
-        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(DialogActivity.this,Manifest.permission.MODIFY_PHONE_STATE);
-        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(DialogActivity.this, new String[]{Manifest.permission.MODIFY_PHONE_STATE}, REQUEST_CODE_ASK_PERMISSIONS);
-            return;
-        }
-    }
 
-    private void ask(Context context) {
 
-        if(ContextCompat.checkSelfPermission(context, MODIFY_PHONE_STATE) == PackageManager.PERMISSION_GRANTED)
-        {
-            Toast.makeText(context,"Grantedddd",Toast.LENGTH_SHORT).show();
-            Log.e("TAG","Granted");
-        }
-        else {
-            Log.e("TAG","Not Granted");
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(DialogActivity.this,MODIFY_PHONE_STATE)) {
-                Toast.makeText(context, "Rationale", Toast.LENGTH_SHORT).show();
-            }
-            Toast.makeText(context, "ASkkkkkkkk", Toast.LENGTH_SHORT).show();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.MODIFY_PHONE_STATE},REQUEST_CODE_ASK_PERMISSIONS);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,String[] permission,int [] grantResult)
-    {
-        if(requestCode == REQUEST_CODE_ASK_PERMISSIONS)
-        {
-            if(grantResult[0] == PackageManager.PERMISSION_GRANTED)
-            {
-                Toast.makeText(this, "OKKKK GRANTED", Toast.LENGTH_LONG).show();
-            }else
-                Toast.makeText(this, "NOTTT GRANTED", Toast.LENGTH_LONG).show();
-        }else
-            super.onRequestPermissionsResult(requestCode,permission,grantResult);
-    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        //setContentView(R.fragment_software_dialog);
-        //insertDummyContactWrapper();
-        ask(this);
 
-        reaadingSharedValues();
+        checkVersion();
+
+        readingSharedValues();
 
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_software_dialog);
-        //widgetValues  = new WidgetValues("1","2","3","4","5","6");
-        //widgetValues.setListener(this);
         binding.setWidgetValue(widgetValues);
         mRootView = (LinearLayout) findViewById(R.id.rlRoot);
         loadButton();
         loadEditText();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private void checkVersion() {
+        if((Build.VERSION.SDK_INT >19) )
+        {
+            (new ErrorFragment()).show(getSupportFragmentManager(),"Error Dialog");
+        }
     }
 
 
@@ -265,22 +220,6 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
         AutoFitEditTextUtil.setNormalization(this, RootView, autoFitEditText);
     }
 
-    /*
-    public void initAutoFitEditText() {
-
-        mAutoFitEditText.setEnabled(true);
-        mAutoFitEditText.setFocusableInTouchMode(true);
-        mAutoFitEditText.setFocusable(true);
-        mAutoFitEditText.setEnableSizeCache(false);
-        //might cause crash on some devices
-        mAutoFitEditText.setMovementMethod(null);
-        // can be added after layout inflation;
-        mAutoFitEditText.setMaxHeight(330);
-        //don't forget to add min text size programmatically
-        mAutoFitEditText.setMinTextSize(60f);
-
-        AutoFitEditTextUtil.setNormalization(this, mRootView, mAutoFitEditText);
-    }*/
     @Override
     public void onClick(View v) {
 
@@ -296,8 +235,6 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
                 this.finish();
                 break;
             case R.id.btnOffHourPlus:
-                //Log.e("TAG", "Value is " + widgetValues.getOffMin().toString() + " :: " + widgetValues.getOffHour().toString());
-
                 controlEditText(R.id.btnOffHourPlus, widgetValues.getOffHour().toString());
                 break;
 
@@ -340,7 +277,7 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
     }
 
 
-    public void reaadingSharedValues() {
+    public void readingSharedValues() {
 
         sharedpreferences = getApplicationContext().getSharedPreferences(MainWidget.CheetatechPref, Context.MODE_PRIVATE);
         int offHour = 0, offMin = 0, onHour = 0, onMin = 0;
@@ -393,28 +330,6 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
         int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), MainWidget.class));
         MainWidget myWidget = new MainWidget();
         myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids);
-        /*
-        Context context = this;
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance
-                (context);
-
-        ComponentName thisAppWidgetComponentName =
-                new ComponentName(context.getPackageName(),getClass().getName()
-                );
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
-                thisAppWidgetComponentName);
-
-        for (int appWidgetID : appWidgetIds) {
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
-                    R.layout.main_widget);
-
-            remoteViews.setTextViewText(R.id.on_text, MainWidget.getMessage(widgetValues.getIntOnHour(), widgetValues.getIntOnMin()));
-            remoteViews.setTextViewText(R.id.off_text, MainWidget.getMessage(widgetValues.getIntOffHour(), widgetValues.getIntOffMin()));
-            remoteViews.setOnClickPendingIntent(R.id.start_stop_button, getPendingSelfIntent(context, MainWidget.ACTION_STARTSTOP_CLICK));
-            remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,MainWidget.ACTION_ONOFF_CLICK));
-            appWidgetManager.updateAppWidget(appWidgetID, remoteViews);
-        }
-        */
     }
 
     private PendingIntent getPendingSelfIntent(Context context, String action) {
