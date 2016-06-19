@@ -15,10 +15,10 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.mobiledatatimerwidget.DialogActivity;
-import com.mobiledatatimerwidget.ErrorActivity;
+import com.mobiledatatimerwidget.activity.DialogActivity;
+import com.mobiledatatimerwidget.activity.ErrorActivity;
 import com.mobiledatatimerwidget.R;
-import com.mobiledatatimerwidget.SPreferences;
+import com.mobiledatatimerwidget.prefferences.SPreferences;
 import com.mobiledatatimerwidget.hardwareClasses.MobileDataClass;
 import com.mobiledatatimerwidget.hardwareClasses.MobileDataController;
 
@@ -187,7 +187,7 @@ public class MainWidget extends AppWidgetProvider {
 
             //remoteViews.setOnClickPendingIntent(R.id.minus_button, getPendingSelfIntent(context, ACTION_MINUS_CLICK));
             //remoteViews.setOnClickPendingIntent(R.id.plus_button, getPendingSelfIntent(context, ACTION_PLUS_CLICK));
-            remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
+            //remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
 
             if((Build.VERSION.SDK_INT > 19) )
             {
@@ -318,7 +318,7 @@ public class MainWidget extends AppWidgetProvider {
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
                     R.layout.main_widget);
             remoteViews.setOnClickPendingIntent(R.id.start_stop_button, getPendingSelfIntent(context, ACTION_STARTSTOP_CLICK));
-            remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
+            //remoteViews.setOnClickPendingIntent(R.id.on_off_button,getPendingSelfIntent(context,ACTION_ONOFF_CLICK));
             appWidgetManager.updateAppWidget(appWidgetID, remoteViews);
         }
     }

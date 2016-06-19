@@ -1,4 +1,4 @@
-package com.mobiledatatimerwidget;
+package com.mobiledatatimerwidget.fragments;
 
 
 import android.app.Activity;
@@ -13,21 +13,23 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.mobiledatatimerwidget.R;
 
-public class ErrorFragment extends DialogFragment implements View.OnClickListener {
+
+public class InfoFragment extends DialogFragment implements View.OnClickListener {
 
 
 
     private OnFragmentInteractionListener mListener;
 
-    public ErrorFragment() {}
+    public InfoFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    public static ErrorFragment newInstance() {
-        ErrorFragment fragment = new ErrorFragment();
+    public static InfoFragment newInstance() {
+        InfoFragment fragment = new InfoFragment();
         return fragment;
     }
     @Override
@@ -43,14 +45,14 @@ public class ErrorFragment extends DialogFragment implements View.OnClickListene
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Log.e("OnCreateDialog", "OnCreateDialog");
         Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar);
-        View view = getActivity().getLayoutInflater().inflate(R.layout.error_dialog, null);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.info_fragment, null);
         dialog.getWindow().setContentView(view);
 
         //
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity)getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        dialog.getWindow().setLayout((int) (displayMetrics.widthPixels * 0.8f), (int) (displayMetrics.heightPixels * 0.4f));
-        dialog.setTitle("VERSION ERROR");
+        dialog.getWindow().setLayout((int) (displayMetrics.widthPixels * 0.8f), (int) (displayMetrics.heightPixels * 0.8f));
+        dialog.setTitle("Internet Period Usage");
         dialog.setCanceledOnTouchOutside(false);
 
         ((Button)view.findViewById(R.id.btn_quit)).setOnClickListener(this);
@@ -67,7 +69,8 @@ public class ErrorFragment extends DialogFragment implements View.OnClickListene
         switch (v.getId())
         {
             case R.id.btn_quit:
-                getDialog().dismiss();
+                    getDialog().dismiss();
+
                 break;
         }
     }

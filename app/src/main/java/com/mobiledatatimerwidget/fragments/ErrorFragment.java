@@ -1,39 +1,35 @@
-package layout;
+package com.mobiledatatimerwidget.fragments;
 
+
+import android.app.Activity;
 import android.app.Dialog;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.NumberPicker;
-import android.widget.TextView;
 
 import com.mobiledatatimerwidget.R;
 
 
-public class SoftwareDialog extends DialogFragment implements View.OnClickListener,NumberPicker.OnValueChangeListener {
+public class ErrorFragment extends DialogFragment implements View.OnClickListener {
 
-    public static final String EXTRA_DEFAULT_FRAGMENT = "com.mobiledatatimerwidget.EXTRA_DEFAULT_FRAGMENT";
 
-    public static final int FRAGMENT_STATISTICS = 0;
-    public static final int FRAGMENT_DISCOVER = 1;
+
     private OnFragmentInteractionListener mListener;
 
-    public SoftwareDialog() {}
+    public ErrorFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    public static SoftwareDialog newInstance() {
-        SoftwareDialog fragment = new SoftwareDialog();
+    public static ErrorFragment newInstance() {
+        ErrorFragment fragment = new ErrorFragment();
         return fragment;
     }
     @Override
@@ -49,22 +45,17 @@ public class SoftwareDialog extends DialogFragment implements View.OnClickListen
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Log.e("OnCreateDialog", "OnCreateDialog");
         Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar);
-        View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_software_dialog, null);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.error_dialog, null);
         dialog.getWindow().setContentView(view);
 
+        //
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity)getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        dialog.getWindow().setLayout((int) (displayMetrics.widthPixels * 0.8f), (int) (displayMetrics.heightPixels * 0.4f));
+        dialog.setTitle("VERSION ERROR");
         dialog.setCanceledOnTouchOutside(false);
 
-        ((Button)view.findViewById(R.id.setTimeButton)).setOnClickListener(this);
-
-        NumberPicker np  = (NumberPicker) view.findViewById(R.id.numberPickerTime);
-        np.setMinValue(0);
-        np.setMaxValue(60);
-        np.setWrapSelectorWheel(true);
-        np.setOnValueChangedListener(this);
-        np.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-
-
-
+        ((Button)view.findViewById(R.id.btn_quit)).setOnClickListener(this);
         return dialog;
     }
 
@@ -73,24 +64,12 @@ public class SoftwareDialog extends DialogFragment implements View.OnClickListen
         super.onViewCreated(view, savedInstanceState);
         Log.e("onViewCreated","onViewCreated");
     }
-        @Override
+    @Override
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.setTimeButton:
-                    getDialog().dismiss();
-                break;
-        }
-    }
-
-    @Override
-    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-        switch (picker.getId())
-        {
-            case R.id.numberPickerTime:
-                    Log.e("TAG","Picker Old value: "+oldVal + " newVal "+ newVal);
-                break;
-            default:
+            case R.id.btn_quit:
+                getDialog().dismiss();
                 break;
         }
     }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.mobiledatatimerwidget.SPreferences;
+import com.mobiledatatimerwidget.prefferences.SPreferences;
 
 import layout.MainWidget;
 

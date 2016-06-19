@@ -93,16 +93,7 @@
         android:layout_gravity="center"
         android:orientation="vertical"
         >
-<!--
-        <com.mobiledatatimerwidget.SwitchView
-            android:id="@+id/switchView1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:background_switch="@drawable/button_switch_facebook"
-            app:text_off="text off"
-            app:text_on="text on"
-            />
-            -->
+
 
 
         <ImageButton

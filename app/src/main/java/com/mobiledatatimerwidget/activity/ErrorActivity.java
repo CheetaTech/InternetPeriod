@@ -1,4 +1,4 @@
-package com.mobiledatatimerwidget;
+package com.mobiledatatimerwidget.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -6,6 +6,8 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.mobiledatatimerwidget.R;
 
 public class ErrorActivity extends FragmentActivity implements OnClickListener{
 

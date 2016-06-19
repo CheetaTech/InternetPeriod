@@ -1,4 +1,4 @@
-package com.mobiledatatimerwidget;
+package com.mobiledatatimerwidget.activity;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -26,16 +26,19 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.mobiledatatimerwidget.AutoSize.AutoFitEditText;
 import com.mobiledatatimerwidget.AutoSize.AutoFitEditTextUtil;
+import com.mobiledatatimerwidget.R;
 import com.mobiledatatimerwidget.databinding.FragmentSoftwareDialogBinding;
 import com.mobiledatatimerwidget.echo.WidgetValues;
 import com.mobiledatatimerwidget.echo.onBinding;
+import com.mobiledatatimerwidget.fragments.ErrorFragment;
+import com.mobiledatatimerwidget.fragments.InfoFragment;
 
 import layout.MainWidget;
 
 public class DialogActivity extends FragmentActivity implements OnClickListener, onBinding {
 
     Button ok_btn, cancel_btn;
-    AutoResizeEditText mAutoResizeEditText = null;
+
     AutoFitEditText etxtOffHour = null;
     AutoFitEditText etxtOffMin = null;
     AutoFitEditText etxtOnHour = null;
@@ -225,13 +228,11 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
 
         switch (v.getId()) {
             case R.id.btn_save:
-                showToastMessage("Ok Button Clicked");
                 saveFileFunction();
                 updateWidgetValues();
                 this.finish();
                 break;
             case R.id.btn_cancel:
-                showToastMessage("Cancel Button Clicked");
                 this.finish();
                 break;
             case R.id.btnOffHourPlus:

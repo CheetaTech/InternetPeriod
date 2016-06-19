@@ -10,7 +10,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 
-import com.mobiledatatimerwidget.MainActivity;
+import com.mobiledatatimerwidget.activity.MainActivity;
 import com.mobiledatatimerwidget.R;
 
 /**

@@ -1,4 +1,4 @@
-package com.mobiledatatimerwidget;
+package com.mobiledatatimerwidget.prefferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
