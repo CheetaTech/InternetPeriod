@@ -1,5 +1,6 @@
 package com.mobiledatatimerwidget.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,11 +8,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,12 +25,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.mobiledatatimerwidget.AutoSize.AutoFitEditText;
 import com.mobiledatatimerwidget.AutoSize.AutoFitEditTextUtil;
 import com.mobiledatatimerwidget.R;
+import com.mobiledatatimerwidget.Util;
 import com.mobiledatatimerwidget.databinding.FragmentSoftwareDialogBinding;
 import com.mobiledatatimerwidget.echo.WidgetValues;
 import com.mobiledatatimerwidget.echo.onBinding;
@@ -52,11 +56,8 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
 
     FragmentSoftwareDialogBinding binding = null;
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    AdRequest adRequest;
+    AdView mAdView;
 
 
 
@@ -69,13 +70,12 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
         checkVersion();
 
         readingSharedValues();
-
+        mAdView = (AdView) findViewById(R.id.adView);
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_software_dialog);
         binding.setWidgetValue(widgetValues);
         mRootView = (LinearLayout) findViewById(R.id.rlRoot);
         loadButton();
         loadEditText();
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void checkVersion() {
@@ -84,7 +84,12 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
             (new ErrorFragment()).show(getSupportFragmentManager(),"Error Dialog");
         }
     }
-
+    private void loadAdv() {
+        if(getAdRequest() !=null ){
+            AdRequest adRequest = getAdRequest();
+            mAdView.loadAd(adRequest);
+        }
+    }
 
     private int checkValue(int id, int value) {
         switch (id) {
@@ -343,40 +348,49 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
     @Override
     public void onStart() {
         super.onStart();
+        loadAdv();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Dialog Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.mobiledatatimerwidget/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Dialog Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.mobiledatatimerwidget/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+    }
+
+    public AdRequest getAdRequest() {
+        boolean test = false;
+        AdRequest ret = null;
+        if (test) {
+
+            boolean hasReadPhoneStatePermission = checkPermission(Manifest.permission.READ_PHONE_STATE);
+            if (hasReadPhoneStatePermission) {
+                ret= new AdRequest.Builder().addTestDevice(getPhoneId()).build();
+                Log.e("TAG","PHONE STATE VAR");
+                Toast toast = Toast.makeText(this, "READ_PHONE_STATE var", Toast.LENGTH_LONG);
+                toast.show();
+            }else{
+                Log.e("TAG","PHONE STATE YOKK");
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_PHONE_STATE}, Util.REQUEST_READ_PHONE_STATE);
+            }
+        } else {
+            Log.e("TAG","NORMAL REKLAM");
+            ret= new AdRequest.Builder().build();
+        }
+        if(ret == null)
+        Log.e("ADS","Ret is : "+ret);
+        return ret;
+    }
+    private boolean checkPermission(String readPhoneState) {
+        boolean ret = ContextCompat.checkSelfPermission(this, readPhoneState) == PackageManager.PERMISSION_GRANTED;
+        return ret;
+    }
+    public String getPhoneId() {
+        String ret = "";
+        final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+        String deviceid = tm.getDeviceId();
+        Log.e("Device Id","id is "+deviceid);
+        return deviceid;
     }
 }
+

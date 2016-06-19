@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "119313210800",
+    "firebase_url": "https://admob-app-id-4049581451.firebaseio.com",
+    "project_id": "admob-app-id-4049581451",
+    "storage_bucket": "admob-app-id-4049581451.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119313210800:android:7a60457bb8ebc039",
+        "android_client_info": {
+          "package_name": "com.mobiledatatimerwidget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119313210800-a7a8071j0t0d10bvshq9hra1rcdogj56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiNkJrM6Uij1-lq8kF4eCoIFpLXgLMAxo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

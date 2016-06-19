@@ -19,5 +19,6 @@
     <string name="error_info">
         This process does not provide for this Android version.\nIt must be API 19 or lower.
     </string>
-    
+    <string name="alt_reklam">ca-app-pub-8446606602742080/7003047850</string>
+
 </resources>
