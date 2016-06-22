@@ -12,10 +12,10 @@ import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,7 +58,7 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     AdRequest adRequest;
     AdView mAdView;
-
+    private String androidId = null;
 
 
 
@@ -67,13 +67,26 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        androidId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
+
+
+
         checkVersion();
 
         readingSharedValues();
-        mAdView = (AdView) findViewById(R.id.adView);
+
+
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_software_dialog);
         binding.setWidgetValue(widgetValues);
         mRootView = (LinearLayout) findViewById(R.id.rlRoot);
+        mAdView = (AdView)findViewById(R.id.adView);
+
+        if(mAdView == null)
+        {
+            Log.e("Adview: ", "Adview is NULL");
+        }
+
         loadButton();
         loadEditText();
     }
@@ -312,7 +325,6 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
         editor.commit();
     }
 
-
     public void hideSoftKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) this
                 .getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -349,7 +361,6 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
     public void onStart() {
         super.onStart();
         loadAdv();
-
     }
 
     @Override
@@ -359,14 +370,14 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
     }
 
     public AdRequest getAdRequest() {
-        boolean test = false;
+        boolean test = true;
         AdRequest ret = null;
         if (test) {
-
             boolean hasReadPhoneStatePermission = checkPermission(Manifest.permission.READ_PHONE_STATE);
             if (hasReadPhoneStatePermission) {
-                ret= new AdRequest.Builder().addTestDevice(getPhoneId()).build();
-                Log.e("TAG","PHONE STATE VAR");
+                //ret= new AdRequest.Builder().addTestDevice(getPhoneId()).build();
+                ret= new AdRequest.Builder().addTestDevice("7BF05AEC1F0B70DA492154074AD25816").addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+                Log.e("TAG","PHONE STATE VAR "+ getPhoneId());
                 Toast toast = Toast.makeText(this, "READ_PHONE_STATE var", Toast.LENGTH_LONG);
                 toast.show();
             }else{
@@ -386,11 +397,28 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
         return ret;
     }
     public String getPhoneId() {
+        String deviceId = MD5(androidId);
+        return  deviceId.toUpperCase();
+        /*
         String ret = "";
         final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
         String deviceid = tm.getDeviceId();
         Log.e("Device Id","id is "+deviceid);
         return deviceid;
+        */
+    }
+    public String MD5(String md5) {
+        try {
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            byte[] array = md.digest(md5.getBytes());
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+            }
+            return sb.toString();
+        } catch (java.security.NoSuchAlgorithmException e) {
+        }
+        return null;
     }
 }
 
