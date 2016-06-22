@@ -351,7 +351,7 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
     }
 
     public AdRequest getAdRequest() {
-        boolean test = true;
+        boolean test = false;
         AdRequest ret = null;
         if (test) {
             boolean hasReadPhoneStatePermission = checkPermission(Manifest.permission.READ_PHONE_STATE);
