@@ -2,17 +2,14 @@ package com.mobiledatatimerwidget.activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -21,7 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -51,42 +47,21 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
     LinearLayout mRootView;
     WidgetValues widgetValues = null;
     private SharedPreferences sharedpreferences;
-    public int val = 5;
-
-
     FragmentSoftwareDialogBinding binding = null;
-    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    AdRequest adRequest;
     AdView mAdView;
     private String androidId = null;
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        androidId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
-
-
-
+        //androidId = Settings.Secure.getString(this.getContentResolver(),Settings.Secure.ANDROID_ID);
         checkVersion();
-
         readingSharedValues();
-
-
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_software_dialog);
         binding.setWidgetValue(widgetValues);
         mRootView = (LinearLayout) findViewById(R.id.rlRoot);
         mAdView = (AdView)findViewById(R.id.adView);
-
-        if(mAdView == null)
-        {
-            Log.e("Adview: ", "Adview is NULL");
-        }
-
         loadButton();
         loadEditText();
     }
@@ -196,19 +171,35 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
     }
 
     private void loadButton() {
-        ok_btn = (Button) findViewById(R.id.btn_save);
+        ( findViewById(R.id.btn_save)).setOnClickListener(this);
+        ( findViewById(R.id.btn_cancel)).setOnClickListener(this);
+        /*
         cancel_btn = (Button) findViewById(R.id.btn_cancel);
         ok_btn.setOnClickListener(this);
         cancel_btn.setOnClickListener(this);
-        ((ImageButton) findViewById(R.id.btnOffHourPlus)).setOnClickListener(this);
+        */
+        findViewById(R.id.btnOffHourPlus).setOnClickListener(this);
+        findViewById(R.id.btnOffHourMinus).setOnClickListener(this);
+        findViewById(R.id.btnOffMinPlus).setOnClickListener(this);
+        findViewById(R.id.btnOffMinMinus).setOnClickListener(this);
+        findViewById(R.id.btnOnHourPlus).setOnClickListener(this);
+        findViewById(R.id.btnOnHourMinus).setOnClickListener(this);
+        findViewById(R.id.btnOnMinPlus).setOnClickListener(this);
+        findViewById(R.id.btnOnMinMinus).setOnClickListener(this);
+        findViewById(R.id.btn_info).setOnClickListener(this);
+
+        /*
+
+                ((ImageButton) findViewById(R.id.btnOffHourPlus)).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.btnOffHourMinus)).setOnClickListener(this);
-        ((ImageButton) findViewById(R.id.btnOffMinPlus)).setOnClickListener(this);
+        findViewById(R.id.btnOffMinPlus).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.btnOffMinMinus)).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.btnOnHourPlus)).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.btnOnHourMinus)).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.btnOnMinPlus)).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.btnOnMinMinus)).setOnClickListener(this);
         ((ImageButton) findViewById(R.id.btn_info)).setOnClickListener(this);
+         */
     }
 
     private void initAutoFitEditText(AutoFitEditText autoFitEditText) {
@@ -304,11 +295,7 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
         offMin = sharedpreferences.getInt(MainWidget.OffMin, 0);
         onHour = sharedpreferences.getInt(MainWidget.OnHour, 0);
         onMin = sharedpreferences.getInt(MainWidget.OnMin, 0);
-
         widgetValues = new WidgetValues(offHour, offMin, onHour, onMin);
-
-        Log.e("TAG", "Veriler " + offHour + " : " + offMin + " : " + onHour + " : " + onMin);
-
     }
 
     private void saveFileFunction() {
@@ -350,12 +337,6 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
         myWidget.onUpdate(this, AppWidgetManager.getInstance(this), ids);
     }
 
-    private PendingIntent getPendingSelfIntent(Context context, String action) {
-        // An explicit intent directed at the current class (the "self").
-        Intent intent = new Intent(context, getClass());
-        intent.setAction(action);
-        return PendingIntent.getBroadcast(context, 0, intent, 0);
-    }
 
     @Override
     public void onStart() {
@@ -375,21 +356,14 @@ public class DialogActivity extends FragmentActivity implements OnClickListener,
         if (test) {
             boolean hasReadPhoneStatePermission = checkPermission(Manifest.permission.READ_PHONE_STATE);
             if (hasReadPhoneStatePermission) {
-                //ret= new AdRequest.Builder().addTestDevice(getPhoneId()).build();
                 ret= new AdRequest.Builder().addTestDevice("7BF05AEC1F0B70DA492154074AD25816").addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-                Log.e("TAG","PHONE STATE VAR "+ getPhoneId());
-                Toast toast = Toast.makeText(this, "READ_PHONE_STATE var", Toast.LENGTH_LONG);
-                toast.show();
             }else{
-                Log.e("TAG","PHONE STATE YOKK");
                 ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_PHONE_STATE}, Util.REQUEST_READ_PHONE_STATE);
             }
         } else {
             Log.e("TAG","NORMAL REKLAM");
             ret= new AdRequest.Builder().build();
         }
-        if(ret == null)
-        Log.e("ADS","Ret is : "+ret);
         return ret;
     }
     private boolean checkPermission(String readPhoneState) {
